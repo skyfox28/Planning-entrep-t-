@@ -1,0 +1,826 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Planning Entrepôt</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --navy:#003366;--navy2:#1a4a8a;--blue:#0070c0;
+  --g50:#f8fafc;--g100:#f1f5f9;--g200:#e2e8f0;--g300:#cbd5e1;
+  --g400:#94a3b8;--g500:#64748b;--g700:#334155;--g800:#1e293b;
+  --r:12px;--sh:0 1px 3px rgba(0,0,0,.1),0 1px 2px rgba(0,0,0,.06);
+  --sh2:0 10px 25px rgba(0,0,0,.15)
+}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:#eef2f7;color:var(--g800);min-height:100vh}
+
+/* ── HEADER ─────────────────────────────────────────────── */
+header{background:var(--navy);position:sticky;top:0;z-index:200;box-shadow:0 2px 10px rgba(0,0,50,.35)}
+.hdr{display:flex;align-items:center;justify-content:space-between;height:58px;max-width:1440px;margin:0 auto;padding:0 20px}
+.logo{display:flex;align-items:center;gap:10px}
+.logo-ic{background:rgba(255,255,255,.12);padding:7px 9px;border-radius:10px;font-size:20px}
+.logo-txt h1{color:#fff;font-size:15px;font-weight:700}
+.logo-txt p{color:rgba(255,255,255,.55);font-size:11px}
+.nav{display:flex;gap:3px;background:rgba(255,255,255,.1);padding:4px;border-radius:10px}
+.nav-btn{padding:6px 18px;border-radius:7px;border:none;cursor:pointer;font-size:13px;font-weight:500;transition:.15s;color:rgba(255,255,255,.8);background:transparent}
+.nav-btn.on{background:#fff;color:var(--navy)}
+.nav-btn:hover:not(.on){background:rgba(255,255,255,.15);color:#fff}
+
+/* ── MAIN ───────────────────────────────────────────────── */
+main{max-width:1440px;margin:0 auto;padding:20px}
+.tab{display:none}.tab.on{display:block}
+
+/* ── BUTTONS ────────────────────────────────────────────── */
+.btn{display:inline-flex;align-items:center;gap:6px;padding:8px 14px;border-radius:10px;border:none;cursor:pointer;font-size:13px;font-weight:500;transition:.15s;white-space:nowrap}
+.btn svg{flex-shrink:0}
+.b-navy{background:var(--navy);color:#fff}.b-navy:hover{background:var(--navy2)}
+.b-gray{background:#fff;color:var(--g700);border:1px solid var(--g200);box-shadow:var(--sh)}.b-gray:hover{background:var(--g50)}
+.b-green{background:#16a34a;color:#fff}.b-green:hover{background:#15803d}
+.b-red{background:#dc2626;color:#fff}.b-red:hover{background:#b91c1c}
+.b-orange{background:#ea580c;color:#fff}.b-orange:hover{background:#c2410c}
+.btn:disabled{opacity:.35;cursor:not-allowed}
+
+/* ── TOP BAR ────────────────────────────────────────────── */
+.topbar{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-bottom:14px}
+.spacer{flex:1}
+
+/* ── WEEK NAV ───────────────────────────────────────────── */
+.wnav{display:flex;align-items:center;background:#fff;border:1px solid var(--g200);border-radius:var(--r);overflow:hidden;box-shadow:var(--sh)}
+.wnav button{padding:9px 11px;border:none;background:transparent;cursor:pointer;color:var(--g500);font-size:16px;transition:.1s}
+.wnav button:hover{background:var(--g100)}
+.winfo{padding:6px 14px;text-align:center;min-width:195px}
+.wnum{font-size:10px;color:var(--g400);font-weight:700;text-transform:uppercase;letter-spacing:.06em}
+.wrange{font-size:13px;font-weight:700;color:var(--g700)}
+
+/* ── ADD BAR ────────────────────────────────────────────── */
+.addbar{display:flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--g200);border-radius:var(--r);padding:5px 12px;box-shadow:var(--sh)}
+.addbar select{border:none;outline:none;font-size:13px;color:var(--g700);min-width:220px;background:transparent;cursor:pointer}
+
+/* ── LEGEND ─────────────────────────────────────────────── */
+.legend{display:flex;flex-wrap:wrap;gap:5px;align-items:center;background:#fff;border:1px solid var(--g200);border-radius:var(--r);padding:9px 14px;box-shadow:var(--sh);margin-bottom:14px}
+.leg-lbl{font-size:10px;font-weight:700;color:var(--g400);text-transform:uppercase;letter-spacing:.06em;margin-right:3px}
+
+/* ── GRID ───────────────────────────────────────────────── */
+.grid-wrap{overflow-x:auto;border-radius:var(--r);box-shadow:var(--sh);border:1px solid var(--g200)}
+.ptable{width:100%;border-collapse:collapse;background:#fff}
+.ptable thead th{background:var(--navy);color:#fff;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;padding:10px 6px;text-align:center;border-right:1px solid rgba(255,255,255,.08);position:sticky;top:58px;z-index:10}
+.ptable thead th.emp-h{text-align:left;padding-left:14px;min-width:185px;position:sticky;left:0;top:58px;z-index:15;background:var(--navy)}
+.ptable thead th.we{background:#1a3a5c;color:#8ba8c8}
+.ptable tbody tr:nth-child(even) td{background:var(--g50)}
+.ptable tbody tr:nth-child(even) .emp-td{background:var(--g50)}
+.ptable tbody tr:nth-child(odd) .emp-td{background:#fff}
+.ptable td{border-right:1px solid var(--g100);border-bottom:1px solid var(--g100);vertical-align:middle}
+.emp-td{position:sticky;left:0;z-index:5;padding:7px 12px;min-width:185px;border-right:2px solid var(--g200)!important}
+.emp-name{font-weight:700;font-size:13px;line-height:1.2}
+.role-pill{display:inline-block;font-size:10px;padding:2px 7px;border-radius:20px;margin-top:3px;font-weight:500}
+.shift-td{text-align:center;padding:3px;min-width:115px}
+.shift-td.we{background:#f5f7fa!important}
+.cell-btn{width:100%;min-height:52px;border:none;background:transparent;cursor:pointer;border-radius:8px;padding:3px;transition:box-shadow .1s;display:flex;align-items:center;justify-content:center}
+.cell-btn:hover{box-shadow:0 0 0 2.5px #3b82f6}
+.cell-empty{color:var(--g300);font-size:20px}
+.cbadge{border-radius:7px;padding:4px 6px;text-align:center;width:100%}
+.cbadge .cc{font-weight:800;font-size:13px}
+.cbadge .ct{font-size:9px;opacity:.85}
+.sum-row td{background:var(--g50)!important;border-top:2px solid var(--g200);padding:4px 4px}
+.sum-td{text-align:center}
+.del-td{padding:0 4px;text-align:center}
+.del-btn{background:none;border:none;cursor:pointer;color:var(--g300);padding:5px;border-radius:6px;font-size:15px;transition:.1s}
+.del-btn:hover{color:#dc2626;background:#fee2e2}
+.empty-grid{text-align:center;padding:56px 20px;color:var(--g400)}
+.empty-grid .ei{font-size:52px;margin-bottom:10px}
+.empty-grid h3{font-size:17px;font-weight:600;color:var(--g500);margin-bottom:6px}
+.tip{text-align:center;font-size:11px;color:var(--g400);margin-top:10px}
+
+/* ── SHIFT POPUP ────────────────────────────────────────── */
+#spop{position:fixed;z-index:9999;background:#fff;border-radius:14px;box-shadow:0 20px 45px rgba(0,0,0,.22);border:1px solid var(--g200);padding:12px;width:300px}
+.pop-arrow{position:absolute;width:12px;height:12px;background:#fff;border-left:1px solid var(--g200);border-top:1px solid var(--g200);transform:rotate(45deg);top:-7px;left:50%;margin-left:-6px}
+.pop-group{font-size:10px;font-weight:700;color:var(--g400);text-transform:uppercase;letter-spacing:.07em;margin:8px 0 5px}
+.pop-group:first-of-type{margin-top:0}
+.pop-shifts{display:flex;flex-wrap:wrap;gap:5px}
+.psbtn{border:none;cursor:pointer;border-radius:7px;padding:4px 10px;text-align:left;transition:transform .1s,box-shadow .1s}
+.psbtn:hover{transform:scale(1.06);box-shadow:0 3px 10px rgba(0,0,0,.18)}
+.psbtn .ps-c{font-weight:800;font-size:12px}
+.psbtn .ps-d{font-size:9px;opacity:.85}
+.pop-clear{display:flex;align-items:center;gap:5px;border:none;background:none;cursor:pointer;color:var(--g400);font-size:12px;padding:7px 2px 2px;border-top:1px solid var(--g100);width:100%;margin-top:6px;transition:color .1s}
+.pop-clear:hover{color:#dc2626}
+
+/* ── BADGE (legend + inline) ────────────────────────────── */
+.sbadge{display:inline-flex;flex-direction:column;align-items:center;border-radius:6px;padding:2px 7px;font-size:11px;font-weight:700;cursor:default}
+.sbadge .sd{font-size:9px;font-weight:400;opacity:.8}
+
+/* ── PERSONNEL ──────────────────────────────────────────── */
+.ph{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px}
+.pt{display:flex;align-items:center;gap:12px}
+.pt-ic{background:var(--navy);color:#fff;width:42px;height:42px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:20px}
+.pt h2{font-size:20px;font-weight:700}
+.pt p{font-size:12px;color:var(--g500)}
+.pcards{display:grid;grid-template-columns:repeat(auto-fill,minmax(115px,1fr));gap:8px;margin-bottom:18px}
+.pcard{border-radius:12px;padding:11px;cursor:pointer;transition:.15s;border:2px solid transparent}
+.pcard:hover{transform:scale(1.03)}
+.pcard.active{transform:scale(1.05);box-shadow:var(--sh2);border-color:currentColor!important}
+.pcard-n{font-size:22px;font-weight:800}
+.pcard-l{font-size:10px;font-weight:600;line-height:1.35;margin-top:2px}
+.etable{width:100%;border-collapse:collapse}
+.etable th{text-align:left;padding:9px 14px;font-size:11px;font-weight:700;color:var(--g400);text-transform:uppercase;letter-spacing:.06em;background:var(--g50);border-bottom:1px solid var(--g200)}
+.etable td{padding:11px 14px;border-bottom:1px solid var(--g100);font-size:13px}
+.etable tr:hover td{background:var(--g50)}
+.etable tr:last-child td{border-bottom:none}
+.ic-btn{background:none;border:none;cursor:pointer;padding:5px;border-radius:7px;color:var(--g400);transition:.1s;font-size:15px}
+.ic-btn.ed:hover{color:#2563eb;background:#eff6ff}
+.ic-btn.dl:hover{color:#dc2626;background:#fee2e2}
+
+/* ── MODAL ──────────────────────────────────────────────── */
+.modal-bg{display:none;position:fixed;inset:0;z-index:500;background:rgba(0,0,0,.45);backdrop-filter:blur(3px);align-items:center;justify-content:center}
+.modal-bg.open{display:flex}
+.modal{background:#fff;border-radius:18px;width:100%;max-width:420px;margin:16px;overflow:hidden;box-shadow:0 25px 50px rgba(0,0,0,.25)}
+.mhdr{background:var(--navy);color:#fff;padding:15px 20px;display:flex;align-items:center;justify-content:space-between}
+.mhdr h3{font-size:15px;font-weight:600}
+.mcls{background:none;border:none;color:rgba(255,255,255,.7);cursor:pointer;font-size:20px;padding:2px 6px;border-radius:6px;transition:.1s}
+.mcls:hover{background:rgba(255,255,255,.15);color:#fff}
+.mbody{padding:20px}
+.frow{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px}
+.fg{margin-bottom:14px}
+.fg label{display:block;font-size:12px;font-weight:600;color:var(--g700);margin-bottom:5px}
+.fc{width:100%;border:1.5px solid var(--g300);border-radius:8px;padding:8px 12px;font-size:13px;outline:none;transition:.15s;background:#fff}
+.fc:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(0,112,192,.12)}
+.mfoot{padding:0 20px 20px;display:flex;justify-content:flex-end;gap:8px}
+.confirm-body{text-align:center;padding:26px 22px}
+.confirm-body .wi{font-size:44px;margin-bottom:10px}
+.confirm-body h3{font-size:16px;font-weight:700;margin-bottom:6px}
+.confirm-body p{font-size:13px;color:var(--g500);margin-bottom:20px}
+.confirm-actions{display:flex;gap:10px}
+.confirm-actions .btn{flex:1;justify-content:center}
+
+/* ── SCROLLBAR ──────────────────────────────────────────── */
+::-webkit-scrollbar{height:5px;width:5px}
+::-webkit-scrollbar-track{background:var(--g100);border-radius:10px}
+::-webkit-scrollbar-thumb{background:var(--g300);border-radius:10px}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="hdr">
+    <div class="logo">
+      <div class="logo-ic">📦</div>
+      <div class="logo-txt"><h1>Planning Entrepôt</h1><p>Gestion des équipes</p></div>
+    </div>
+    <nav class="nav">
+      <button class="nav-btn on" onclick="setTab('planning')">📅 Planning</button>
+      <button class="nav-btn" onclick="setTab('personnel')">👥 Personnel</button>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <div id="tab-planning" class="tab on"></div>
+  <div id="tab-personnel" class="tab"></div>
+</main>
+
+<!-- Employee modal -->
+<div id="emp-modal" class="modal-bg" onclick="if(event.target===this)closeEmpModal()">
+  <div class="modal">
+    <div class="mhdr">
+      <h3 id="modal-title">Ajouter un employé</h3>
+      <button class="mcls" onclick="closeEmpModal()">✕</button>
+    </div>
+    <div class="mbody">
+      <div class="frow">
+        <div class="fg">
+          <label>Prénom</label>
+          <input id="f-prenom" class="fc" placeholder="Prénom" oninput="validateEmpForm()">
+        </div>
+        <div class="fg">
+          <label>Nom</label>
+          <input id="f-nom" class="fc" placeholder="NOM" oninput="validateEmpForm()" style="text-transform:uppercase">
+        </div>
+      </div>
+      <div class="fg">
+        <label>Poste</label>
+        <select id="f-poste" class="fc" onchange="validateEmpForm()"></select>
+      </div>
+    </div>
+    <div class="mfoot">
+      <button class="btn b-gray" onclick="closeEmpModal()">Annuler</button>
+      <button id="modal-save-btn" class="btn b-navy" onclick="saveEmployee()" disabled>✓ Enregistrer</button>
+    </div>
+  </div>
+</div>
+
+<!-- Confirm delete modal -->
+<div id="confirm-modal" class="modal-bg" onclick="if(event.target===this)closeConfirm()">
+  <div class="modal" style="max-width:360px">
+    <div class="confirm-body">
+      <div class="wi">⚠️</div>
+      <h3 id="confirm-title">Supprimer ?</h3>
+      <p id="confirm-msg"></p>
+      <div class="confirm-actions">
+        <button class="btn b-gray" onclick="closeConfirm()">Annuler</button>
+        <button class="btn b-red" id="confirm-ok" onclick="confirmAction()">Supprimer</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+// ═══════════════════════════════════════════════════════
+//  DATA
+// ═══════════════════════════════════════════════════════
+const ROLES = ['Coordinateur','Réception','Expédition','Cariste Quai',
+               'Cariste Entrée Silo','Cariste Sortie Silo','Cariste GMS','Préparateur']
+
+const ROLE_CLR = {
+  'Coordinateur':        {bg:'#EDE9FE',tx:'#5B21B6',bd:'#C4B5FD'},
+  'Réception':           {bg:'#DBEAFE',tx:'#1D4ED8',bd:'#93C5FD'},
+  'Expédition':          {bg:'#D1FAE5',tx:'#065F46',bd:'#6EE7B7'},
+  'Cariste Quai':        {bg:'#FEF3C7',tx:'#92400E',bd:'#FCD34D'},
+  'Cariste Entrée Silo': {bg:'#FFE4E6',tx:'#9F1239',bd:'#FCA5A5'},
+  'Cariste Sortie Silo': {bg:'#FCE7F3',tx:'#9D174D',bd:'#F9A8D4'},
+  'Cariste GMS':         {bg:'#E0F2FE',tx:'#075985',bd:'#7DD3FC'},
+  'Préparateur':         {bg:'#F0FDF4',tx:'#166534',bd:'#86EFAC'},
+}
+
+const SHIFTS = [
+  {code:'M1', label:'Matin',      detail:'05h00–13h00', groupe:'3×8',      bg:'#FFF3B0',tx:'#7F6000',bd:'#FFC107'},
+  {code:'AM1',label:'Après-midi', detail:'13h00–21h00', groupe:'3×8',      bg:'#DBEAFE',tx:'#1E40AF',bd:'#3B82F6'},
+  {code:'N1', label:'Nuit',       detail:'21h00–05h00', groupe:'3×8',      bg:'#1E293B',tx:'#F1F5F9',bd:'#334155'},
+  {code:'M2', label:'Matin',      detail:'05h00–12h36', groupe:'3×7h36',   bg:'#FEF08A',tx:'#713F12',bd:'#EAB308'},
+  {code:'AM2',label:'Après-midi', detail:'12h24–20h00', groupe:'3×7h36',   bg:'#BAE6FD',tx:'#0C4A6E',bd:'#0EA5E9'},
+  {code:'N2', label:'Nuit',       detail:'20h00–03h36', groupe:'3×7h36',   bg:'#334155',tx:'#E2E8F0',bd:'#475569'},
+  {code:'J',  label:'Journée',    detail:'08h00–16h16', groupe:'Journée',  bg:'#DCFCE7',tx:'#14532D',bd:'#22C55E'},
+  {code:'R',  label:'Repos',      detail:'',            groupe:'Absence',  bg:'#F1F5F9',tx:'#64748B',bd:'#CBD5E1'},
+  {code:'CP', label:'Congés',     detail:'',            groupe:'Absence',  bg:'#FEF9C3',tx:'#A16207',bd:'#FACC15'},
+  {code:'RTT',label:'RTT',        detail:'',            groupe:'Absence',  bg:'#FFEDD5',tx:'#C2410C',bd:'#FB923C'},
+  {code:'FM', label:'Formation',  detail:'',            groupe:'Absence',  bg:'#F3E8FF',tx:'#6B21A8',bd:'#A855F7'},
+  {code:'MAL',label:'Maladie',    detail:'',            groupe:'Absence',  bg:'#FFE4E6',tx:'#9F1239',bd:'#F43F5E'},
+  {code:'ABS',label:'Absence',    detail:'',            groupe:'Absence',  bg:'#FEE2E2',tx:'#991B1B',bd:'#EF4444'},
+]
+const SBC = Object.fromEntries(SHIFTS.map(s=>[s.code,s]))
+const GROUPS = [...new Set(SHIFTS.map(s=>s.groupe))]
+const DAYS = ['Lun','Mar','Mer','Jeu','Ven','Sam','Dim']
+
+// ═══════════════════════════════════════════════════════
+//  DATE UTILS
+// ═══════════════════════════════════════════════════════
+function weekStart(d=new Date()){
+  const x=new Date(d), day=x.getDay()
+  x.setDate(x.getDate()-day+(day===0?-6:1))
+  x.setHours(0,0,0,0)
+  return x.toISOString().slice(0,10)
+}
+function addDays(s,n){
+  const d=new Date(s); d.setDate(d.getDate()+n); return d.toISOString().slice(0,10)
+}
+function weekDays(ws){
+  const m=new Date(ws)
+  return Array.from({length:7},(_,i)=>{const d=new Date(m);d.setDate(m.getDate()+i);return d})
+}
+function weekNum(ws){
+  const d=new Date(ws); d.setDate(d.getDate()+4-(d.getDay()||7))
+  return Math.ceil((((d-new Date(d.getFullYear(),0,1))/864e5)+1)/7)
+}
+function fmt(d){return d.toLocaleDateString('fr-FR',{day:'2-digit',month:'2-digit'})}
+function fmtL(d){return d.toLocaleDateString('fr-FR',{day:'2-digit',month:'2-digit',year:'numeric'})}
+
+// ═══════════════════════════════════════════════════════
+//  STATE
+// ═══════════════════════════════════════════════════════
+let state = {
+  employees:[
+    {id:'e1', prenom:'Sophie',   nom:'MARTIN',   poste:'Coordinateur'},
+    {id:'e2', prenom:'Thomas',   nom:'DUPONT',   poste:'Réception'},
+    {id:'e3', prenom:'Julie',    nom:'BERNARD',  poste:'Réception'},
+    {id:'e4', prenom:'Laura',    nom:'PETIT',    poste:'Réception'},
+    {id:'e5', prenom:'Maxime',   nom:'ROBERT',   poste:'Expédition'},
+    {id:'e6', prenom:'Claire',   nom:'RICHARD',  poste:'Expédition'},
+    {id:'e7', prenom:'Nicolas',  nom:'SIMON',    poste:'Expédition'},
+    {id:'e8', prenom:'Kevin',    nom:'LAURENT',  poste:'Cariste Quai'},
+    {id:'e9', prenom:'Antoine',  nom:'THOMAS',   poste:'Cariste Quai'},
+    {id:'e10',prenom:'Stéphane', nom:'LEROY',    poste:'Cariste Entrée Silo'},
+    {id:'e11',prenom:'Emilie',   nom:'MOREAU',   poste:'Cariste Sortie Silo'},
+    {id:'e12',prenom:'Lucas',    nom:'GARNIER',  poste:'Cariste GMS'},
+    {id:'e13',prenom:'Marie',    nom:'BLANC',    poste:'Cariste GMS'},
+    {id:'e14',prenom:'Alexis',   nom:'GUERIN',   poste:'Préparateur'},
+    {id:'e15',prenom:'Sarah',    nom:'MOULIN',   poste:'Préparateur'},
+  ],
+  plannings:{},
+  week: weekStart(),
+  tab:'planning',
+  filterPoste:'all',
+  editEmpId: null,
+  confirmCb: null,
+}
+
+function save(){
+  try{localStorage.setItem('planning-v3',JSON.stringify({employees:state.employees,plannings:state.plannings}))}catch(e){}
+}
+function load(){
+  try{
+    const s=JSON.parse(localStorage.getItem('planning-v3'))
+    if(s){state.employees=s.employees||state.employees;state.plannings=s.plannings||{}}
+  }catch(e){}
+}
+
+// ═══════════════════════════════════════════════════════
+//  PLANNING ACTIONS
+// ═══════════════════════════════════════════════════════
+function planRows(){return state.plannings[state.week]||[]}
+
+function addToPlanning(empId){
+  if(!empId) return
+  const rows=planRows()
+  if(rows.find(r=>r.employeeId===empId)) return
+  state.plannings[state.week]=[...rows,{employeeId:empId,shifts:Array(7).fill(null)}]
+  save(); renderPlanning()
+}
+function removeRow(i){
+  const rows=[...planRows()]; rows.splice(i,1)
+  state.plannings[state.week]=rows; save(); renderPlanning()
+}
+function setShift(rowIdx,dayIdx,code){
+  const rows=planRows().map((r,i)=>{
+    if(i!==rowIdx) return r
+    const s=[...r.shifts]; s[dayIdx]=code; return {...r,shifts:s}
+  })
+  state.plannings[state.week]=rows; save(); renderPlanning()
+}
+function copyPrev(){
+  const prev=addDays(state.week,-7)
+  const pr=state.plannings[prev]
+  if(!pr||!pr.length){alert('Aucun planning la semaine précédente.');return}
+  if(planRows().length&&!confirm('Écraser le planning de cette semaine ?')) return
+  state.plannings[state.week]=pr.map(r=>({...r,shifts:[...r.shifts]}))
+  save(); renderPlanning()
+}
+
+// ═══════════════════════════════════════════════════════
+//  RENDER PLANNING
+// ═══════════════════════════════════════════════════════
+function renderPlanning(){
+  const rows=planRows()
+  const days=weekDays(state.week)
+  const wn=weekNum(state.week)
+  const used=new Set(rows.map(r=>r.employeeId))
+  const avail=state.employees.filter(e=>!used.has(e.id))
+
+  // Legend HTML
+  const legHtml=SHIFTS.map(s=>`
+    <span class="sbadge" style="background:${s.bg};color:${s.tx};border:1px solid ${s.bd}">
+      ${s.code}${s.detail?`<span class="sd">${s.detail}</span>`:''}
+    </span>`).join('')
+
+  // Table header
+  const thDays=days.map((d,i)=>`
+    <th class="${i>=5?'we':''}" style="min-width:115px">
+      ${DAYS[i]}<br><span style="font-weight:400;opacity:.75;font-size:10px">${fmt(d)}</span>
+    </th>`).join('')
+
+  // Table rows
+  const tbRows = rows.length===0
+    ? `<tr><td colspan="9">
+        <div class="empty-grid">
+          <div class="ei">📋</div>
+          <h3>Planning vide</h3>
+          <p>Ajoutez des employés via le menu ci-dessus.</p>
+        </div>
+       </td></tr>`
+    : rows.map((row,ri)=>{
+        const emp=state.employees.find(e=>e.id===row.employeeId)
+        if(!emp) return ''
+        const rc=ROLE_CLR[emp.poste]||{bg:'#F1F5F9',tx:'#475569',bd:'#CBD5E1'}
+        const cells=row.shifts.map((code,di)=>{
+          const we=di>=5
+          const s=code?SBC[code]:null
+          const inner=s
+            ? `<div class="cbadge" style="background:${s.bg};color:${s.tx};border:1.5px solid ${s.bd}">
+                <div class="cc">${s.code}</div>
+                ${s.detail?`<div class="ct">${s.detail}</div>`:''}
+               </div>`
+            : `<span class="cell-empty">—</span>`
+          return `<td class="shift-td${we?' we':''}">
+            <button class="cell-btn" onclick="openPop(${ri},${di},this)">${inner}</button>
+          </td>`
+        }).join('')
+        return `<tr>
+          <td class="emp-td">
+            <div class="emp-name">${emp.nom} ${emp.prenom}</div>
+            <span class="role-pill" style="background:${rc.bg};color:${rc.tx};border:1px solid ${rc.bd}">${emp.poste}</span>
+          </td>
+          ${cells}
+          <td class="del-td">
+            <button class="del-btn" onclick="removeRow(${ri})" title="Retirer du planning">✕</button>
+          </td>
+        </tr>`
+      }).join('')
+
+  // Summary row
+  const sumCells=Array.from({length:7},(_,di)=>{
+    const codes=rows.map(r=>r.shifts[di]).filter(Boolean)
+    const cnt={}; codes.forEach(c=>{cnt[c]=(cnt[c]||0)+1})
+    const badges=Object.entries(cnt).map(([c,n])=>{
+      const s=SBC[c]; if(!s) return ''
+      return `<span style="background:${s.bg};color:${s.tx};border:1px solid ${s.bd};font-size:9px;font-weight:700;padding:1px 4px;border-radius:4px;display:inline-block;margin:1px">${c}×${n}</span>`
+    }).join('')
+    return `<td class="sum-td">${badges||'<span style="color:#ccc">—</span>'}</td>`
+  }).join('')
+
+  const sumRow=rows.length>0?`<tr class="sum-row">
+    <td class="emp-td" style="font-size:10px;font-weight:700;color:#94a3b8;text-transform:uppercase;letter-spacing:.05em">Effectifs</td>
+    ${sumCells}<td></td></tr>`:''
+
+  // Avail select options
+  const opts=avail.length
+    ? avail.map(e=>`<option value="${e.id}">${e.nom} ${e.prenom} — ${e.poste}</option>`).join('')
+    : `<option value="" disabled>Tous les employés sont planifiés</option>`
+
+  document.getElementById('tab-planning').innerHTML=`
+  <div class="topbar">
+    <div class="wnav">
+      <button onclick="changeWeek(-7)">&#8249;</button>
+      <div class="winfo">
+        <div class="wnum">Semaine ${wn} · ${days[0].getFullYear()}</div>
+        <div class="wrange">${fmt(days[0])} – ${fmt(days[6])}</div>
+      </div>
+      <button onclick="changeWeek(7)">&#8250;</button>
+    </div>
+
+    <button class="btn b-gray" onclick="goToday()" title="Semaine en cours">
+      <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+      Aujourd'hui
+    </button>
+
+    <div class="addbar">
+      <svg width="14" height="14" fill="none" stroke="#94a3b8" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+      <select id="add-emp-sel" onchange="">
+        <option value="">— Ajouter un employé au planning —</option>
+        ${opts}
+      </select>
+      <div style="width:1px;height:20px;background:#e2e8f0"></div>
+      <button class="btn b-navy" style="padding:5px 12px" onclick="addToPlanning(document.getElementById('add-emp-sel').value);document.getElementById('add-emp-sel').value=''">
+        <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        Ajouter
+      </button>
+    </div>
+
+    <div class="spacer"></div>
+
+    <button class="btn b-gray" onclick="copyPrev()" title="Copier semaine précédente">
+      <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+      Copier sem. préc.
+    </button>
+    <button class="btn b-red" onclick="exportPDF()">
+      <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="9" y1="13" x2="15" y2="13"/><line x1="9" y1="17" x2="12" y2="17"/></svg>
+      PDF
+    </button>
+    <button class="btn b-green" onclick="exportExcel()">
+      <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><polyline points="8 13 12 17 16 13"/><line x1="12" y1="17" x2="12" y2="11"/></svg>
+      Excel
+    </button>
+  </div>
+
+  <div class="legend">
+    <span class="leg-lbl">Légende</span>
+    ${legHtml}
+  </div>
+
+  <div class="grid-wrap">
+    <table class="ptable" id="planning-table">
+      <thead>
+        <tr>
+          <th class="emp-h">Employé / Poste</th>
+          ${thDays}
+          <th style="width:36px;background:var(--navy)"></th>
+        </tr>
+      </thead>
+      <tbody>
+        ${tbRows}
+        ${sumRow}
+      </tbody>
+    </table>
+  </div>
+  ${rows.length>0?'<div class="tip">💡 Cliquez sur une cellule pour choisir le créneau horaire</div>':''}
+  `
+}
+
+// ═══════════════════════════════════════════════════════
+//  SHIFT POPUP
+// ═══════════════════════════════════════════════════════
+let popState=null
+
+function openPop(rowIdx, dayIdx, triggerEl){
+  closePop()
+  const rect=triggerEl.getBoundingClientRect()
+
+  const pop=document.createElement('div')
+  pop.id='spop'
+
+  const groupsHtml=GROUPS.map(g=>{
+    const items=SHIFTS.filter(s=>s.groupe===g)
+    return `<div class="pop-group">${g}</div>
+    <div class="pop-shifts">
+      ${items.map(s=>`
+        <button class="psbtn" style="background:${s.bg};color:${s.tx};border:1.5px solid ${s.bd}"
+          onclick="selectShift(${rowIdx},${dayIdx},'${s.code}')">
+          <div class="ps-c">${s.code}</div>
+          <div class="ps-d">${s.detail||s.label}</div>
+        </button>`).join('')}
+    </div>`
+  }).join('')
+
+  pop.innerHTML=`
+    <div class="pop-arrow"></div>
+    ${groupsHtml}
+    <button class="pop-clear" onclick="selectShift(${rowIdx},${dayIdx},null)">
+      <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      Effacer
+    </button>`
+
+  document.body.appendChild(pop)
+
+  // Position: centered below trigger, flip up if near bottom
+  const pw=300, ph=pop.offsetHeight||280
+  let left=rect.left+rect.width/2-pw/2
+  let top=rect.bottom+8
+  if(left<8) left=8
+  if(left+pw>window.innerWidth-8) left=window.innerWidth-pw-8
+  if(top+ph>window.innerHeight-8) top=rect.top-ph-8
+  pop.style.left=left+'px'
+  pop.style.top=top+'px'
+  if(top<rect.top){
+    pop.querySelector('.pop-arrow').style.cssText='position:absolute;width:12px;height:12px;background:#fff;border-right:1px solid #e2e8f0;border-bottom:1px solid #e2e8f0;transform:rotate(45deg);bottom:-7px;left:50%;margin-left:-6px;top:auto'
+  }
+
+  popState={rowIdx,dayIdx}
+  setTimeout(()=>document.addEventListener('mousedown',closePop),0)
+}
+
+function closePop(e){
+  const pop=document.getElementById('spop')
+  if(pop && (!e||!pop.contains(e.target))){
+    pop.remove(); popState=null
+    document.removeEventListener('mousedown',closePop)
+  }
+}
+
+function selectShift(rowIdx,dayIdx,code){
+  closePop()
+  setShift(rowIdx,dayIdx,code)
+}
+
+// ═══════════════════════════════════════════════════════
+//  RENDER PERSONNEL
+// ═══════════════════════════════════════════════════════
+function renderPersonnel(){
+  const emps=state.filterPoste==='all'
+    ? state.employees
+    : state.employees.filter(e=>e.poste===state.filterPoste)
+
+  const cntByPoste=Object.fromEntries(ROLES.map(r=>[r,state.employees.filter(e=>e.poste===r).length]))
+
+  const cards=ROLES.map(r=>{
+    const c=ROLE_CLR[r]||{bg:'#F1F5F9',tx:'#475569',bd:'#CBD5E1'}
+    const active=state.filterPoste===r
+    return `<div class="pcard${active?' active':''}" style="background:${c.bg};color:${c.tx};border-color:${active?c.bd:'transparent'}"
+      onclick="setFilter('${r}')">
+      <div class="pcard-n">${cntByPoste[r]}</div>
+      <div class="pcard-l">${r}</div>
+    </div>`
+  }).join('')
+
+  const rows=emps.length===0
+    ? `<tr><td colspan="4" style="text-align:center;padding:40px;color:#94a3b8;font-size:13px">
+        Aucun employé${state.filterPoste!=='all'?' dans ce poste':''}</td></tr>`
+    : emps.map((emp,i)=>{
+        const c=ROLE_CLR[emp.poste]||{bg:'#F1F5F9',tx:'#475569',bd:'#CBD5E1'}
+        return `<tr>
+          <td style="color:#94a3b8;font-size:12px">${i+1}</td>
+          <td><strong>${emp.nom}</strong></td>
+          <td>${emp.prenom}</td>
+          <td><span class="role-pill" style="background:${c.bg};color:${c.tx};border:1px solid ${c.bd}">${emp.poste}</span></td>
+          <td>
+            <button class="ic-btn ed" onclick="openEmpModal('${emp.id}')" title="Modifier">✏️</button>
+            <button class="ic-btn dl" onclick="askDelete('${emp.id}')" title="Supprimer">🗑️</button>
+          </td>
+        </tr>`
+      }).join('')
+
+  const filterPill=state.filterPoste!=='all'
+    ? `<div style="display:flex;align-items:center;gap:8px;margin-bottom:14px">
+        <span style="font-size:12px;color:#64748b">Filtre :</span>
+        <button class="btn b-gray" style="padding:3px 10px;font-size:12px" onclick="setFilter('all')">
+          ${state.filterPoste} ✕
+        </button>
+       </div>` : ''
+
+  document.getElementById('tab-personnel').innerHTML=`
+  <div class="ph">
+    <div class="pt">
+      <div class="pt-ic">👥</div>
+      <div>
+        <h2>Personnel</h2>
+        <p>${state.employees.length} employé${state.employees.length>1?'s':''} enregistré${state.employees.length>1?'s':''}</p>
+      </div>
+    </div>
+    <button class="btn b-navy" onclick="openEmpModal(null)">
+      <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+      Ajouter un employé
+    </button>
+  </div>
+
+  <div class="pcards">${cards}</div>
+  ${filterPill}
+
+  <div class="card">
+    <table class="etable">
+      <thead><tr>
+        <th style="width:40px">#</th>
+        <th>Nom</th><th>Prénom</th><th>Poste</th><th style="width:80px"></th>
+      </tr></thead>
+      <tbody>${rows}</tbody>
+    </table>
+  </div>`
+}
+
+// ═══════════════════════════════════════════════════════
+//  EMPLOYEE MODAL
+// ═══════════════════════════════════════════════════════
+function openEmpModal(empId){
+  state.editEmpId=empId
+  const emp=empId?state.employees.find(e=>e.id===empId):null
+  document.getElementById('modal-title').textContent=emp?'Modifier un employé':'Ajouter un employé'
+  document.getElementById('f-prenom').value=emp?.prenom||''
+  document.getElementById('f-nom').value=emp?.nom||''
+  // Fill poste options
+  const sel=document.getElementById('f-poste')
+  sel.innerHTML=ROLES.map(r=>`<option value="${r}"${emp?.poste===r?' selected':''}>${r}</option>`).join('')
+  document.getElementById('modal-save-btn').disabled=!(emp?.prenom&&emp?.nom)
+  document.getElementById('emp-modal').classList.add('open')
+  setTimeout(()=>document.getElementById('f-prenom').focus(),100)
+}
+function closeEmpModal(){document.getElementById('emp-modal').classList.remove('open')}
+
+function validateEmpForm(){
+  const ok=document.getElementById('f-prenom').value.trim()&&document.getElementById('f-nom').value.trim()
+  document.getElementById('modal-save-btn').disabled=!ok
+}
+
+function saveEmployee(){
+  const prenom=document.getElementById('f-prenom').value.trim()
+  const nom=document.getElementById('f-nom').value.trim().toUpperCase()
+  const poste=document.getElementById('f-poste').value
+  if(!prenom||!nom) return
+  if(state.editEmpId){
+    state.employees=state.employees.map(e=>e.id===state.editEmpId?{...e,prenom,nom,poste}:e)
+  } else {
+    state.employees=[...state.employees,{id:'e'+Date.now(),prenom,nom,poste}]
+  }
+  save(); closeEmpModal(); renderPersonnel()
+}
+
+// ═══════════════════════════════════════════════════════
+//  CONFIRM DELETE
+// ═══════════════════════════════════════════════════════
+function askDelete(empId){
+  const emp=state.employees.find(e=>e.id===empId)
+  document.getElementById('confirm-title').textContent=`Supprimer ${emp?.prenom} ${emp?.nom} ?`
+  document.getElementById('confirm-msg').textContent='Cette action retirera cet employé de tous les plannings.'
+  state.confirmCb=()=>{
+    state.employees=state.employees.filter(e=>e.id!==empId)
+    for(const w in state.plannings) state.plannings[w]=state.plannings[w].filter(r=>r.employeeId!==empId)
+    save(); closeConfirm(); renderPersonnel()
+  }
+  document.getElementById('confirm-modal').classList.add('open')
+}
+function closeConfirm(){document.getElementById('confirm-modal').classList.remove('open');state.confirmCb=null}
+function confirmAction(){if(state.confirmCb) state.confirmCb()}
+
+// ═══════════════════════════════════════════════════════
+//  NAVIGATION
+// ═══════════════════════════════════════════════════════
+function setTab(t){
+  state.tab=t
+  document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('on'))
+  document.querySelectorAll('.tab').forEach(b=>b.classList.remove('on'))
+  event.currentTarget.classList.add('on')
+  document.getElementById('tab-'+t).classList.add('on')
+  t==='planning'?renderPlanning():renderPersonnel()
+}
+function changeWeek(n){state.week=addDays(state.week,n);renderPlanning()}
+function goToday(){state.week=weekStart();renderPlanning()}
+function setFilter(p){state.filterPoste=p;renderPersonnel()}
+
+// ═══════════════════════════════════════════════════════
+//  EXPORT PDF
+// ═══════════════════════════════════════════════════════
+function exportPDF(){
+  const rows=planRows(), days=weekDays(state.week), wn=weekNum(state.week)
+
+  const rowsHtml=rows.map(row=>{
+    const emp=state.employees.find(e=>e.id===row.employeeId); if(!emp) return ''
+    const rc=ROLE_CLR[emp.poste]||{bg:'#F1F5F9',tx:'#475569',bd:'#CBD5E1'}
+    const cells=row.shifts.map((code,i)=>{
+      const we=i>=5, s=code?SBC[code]:null
+      return `<td class="${we?'we':''}">
+        ${s?`<div class="b" style="background:${s.bg};color:${s.tx};border:1.5px solid ${s.bd}">
+          <strong>${s.code}</strong>${s.detail?`<br><small>${s.detail}</small>`:''}</div>`:'<span class="em">—</span>'}
+      </td>`
+    }).join('')
+    return `<tr>
+      <td class="ec">
+        <div class="en">${emp.nom} ${emp.prenom}</div>
+        <span class="rp" style="background:${rc.bg};color:${rc.tx};border:1px solid ${rc.bd}">${emp.poste}</span>
+      </td>${cells}</tr>`
+  }).join('')
+
+  const legHtml=SHIFTS.map(s=>
+    `<span class="li" style="background:${s.bg};color:${s.tx};border:1.5px solid ${s.bd}"><strong>${s.code}</strong>${s.detail?' '+s.detail:' '+s.label}</span>`
+  ).join('')
+
+  const html=`<!DOCTYPE html><html lang="fr"><head><meta charset="UTF-8">
+  <title>Planning Semaine ${wn}</title>
+  <style>
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:'Segoe UI',Arial,sans-serif;font-size:11px;color:#1e293b;background:#fff}
+    @page{size:A4 landscape;margin:8mm}
+    .hd{background:#003366;color:#fff;padding:9px 14px;border-radius:7px 7px 0 0;display:flex;justify-content:space-between;align-items:center}
+    .hd h1{font-size:14px;font-weight:700}.hd .sub{font-size:10px;opacity:.7}
+    .leg{padding:5px 8px;background:#f8fafc;border:1px solid #e2e8f0;border-top:none;display:flex;flex-wrap:wrap;gap:4px;align-items:center;margin-bottom:0}
+    .li{border-radius:4px;padding:2px 6px;font-size:9px;white-space:nowrap}
+    table{width:100%;border-collapse:collapse}
+    thead th{background:#1e3a5f;color:#fff;font-size:10px;font-weight:600;padding:6px 4px;text-align:center;border:1px solid #2d5282}
+    thead th.emp-th{text-align:left;padding-left:10px;min-width:130px}
+    thead th.we{background:#2d4a6e;color:#8ba8c8}
+    tr:nth-child(even) td{background:#f8fafc}
+    td{border:1px solid #e2e8f0;vertical-align:middle}
+    .ec{padding:4px 8px;min-width:130px}
+    .en{font-weight:700;font-size:11px}
+    .rp{display:inline-block;font-size:8px;padding:1px 5px;border-radius:10px;margin-top:2px}
+    td:not(.ec){text-align:center;padding:3px;width:88px}.we{background:#f1f5f9!important}
+    .b{border-radius:5px;padding:3px 5px;display:inline-block;min-width:72px;text-align:center}
+    .b strong{font-size:11px;display:block}.b small{font-size:8px;opacity:.85}
+    .em{color:#cbd5e1;font-size:14px}
+    .ft{display:flex;justify-content:space-between;color:#94a3b8;font-size:9px;padding:4px 2px;margin-top:5px}
+  </style>
+  </head><body>
+  <div class="hd">
+    <div><h1>📦 Planning Entrepôt — Semaine ${wn}</h1>
+    <div class="sub">${fmtL(days[0])} au ${fmtL(days[6])}</div></div>
+    <div class="sub">${rows.length} employé${rows.length>1?'s':''} planifié${rows.length>1?'s':''}</div>
+  </div>
+  <div class="leg">${legHtml}</div>
+  <table>
+    <thead><tr>
+      <th class="emp-th">Employé</th>
+      ${DAYS.map((d,i)=>`<th class="${i>=5?'we':''}">${d}<br><span style="font-weight:400;opacity:.8">${fmt(days[i])}</span></th>`).join('')}
+    </tr></thead>
+    <tbody>${rowsHtml||'<tr><td colspan="8" style="text-align:center;padding:20px;color:#94a3b8">Aucun employé planifié</td></tr>'}</tbody>
+  </table>
+  <div class="ft">
+    <span>Imprimé le ${new Date().toLocaleDateString('fr-FR')} à ${new Date().toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit'})}</span>
+    <span>Planning Entrepôt — Semaine ${wn} / ${days[0].getFullYear()}</span>
+  </div>
+  <script>window.onload=()=>window.print()<\/script>
+  </body></html>`
+
+  const w=window.open('','_blank')
+  w.document.write(html); w.document.close()
+}
+
+// ═══════════════════════════════════════════════════════
+//  EXPORT EXCEL
+// ═══════════════════════════════════════════════════════
+function exportExcel(){
+  if(typeof XLSX==='undefined'){alert('Librairie Excel non chargée.');return}
+  const rows=planRows(), days=weekDays(state.week), wn=weekNum(state.week)
+  const aoa=[]
+  aoa.push([`PLANNING ENTREPÔT — Semaine ${wn} (${fmtL(days[0])} au ${fmtL(days[6])})`])
+  aoa.push([])
+  aoa.push(['Poste','Employé',...DAYS.map((d,i)=>`${d} ${fmt(days[i])}`)])
+  rows.forEach(row=>{
+    const emp=state.employees.find(e=>e.id===row.employeeId); if(!emp) return
+    aoa.push([emp.poste,`${emp.nom} ${emp.prenom}`,...row.shifts.map(c=>{
+      if(!c) return ''; const s=SBC[c]; return s?`${c}${s.detail?' '+s.detail:''}`:c
+    })])
+  })
+  const ws=XLSX.utils.aoa_to_sheet(aoa)
+  ws['!cols']=[{wch:22},{wch:22},...Array(7).fill({wch:16})]
+  ws['!merges']=[{s:{r:0,c:0},e:{r:0,c:8}}]
+  const wb=XLSX.utils.book_new()
+  XLSX.utils.book_append_sheet(wb,ws,'Planning')
+  const leg=[['Code','Libellé','Horaire','Groupe'],...SHIFTS.map(s=>[s.code,s.label,s.detail||'—',s.groupe])]
+  const ws2=XLSX.utils.aoa_to_sheet(leg)
+  ws2['!cols']=[{wch:7},{wch:14},{wch:17},{wch:11}]
+  XLSX.utils.book_append_sheet(wb,ws2,'Légende')
+  XLSX.writeFile(wb,`Planning_S${wn}.xlsx`)
+}
+
+// ═══════════════════════════════════════════════════════
+//  INIT
+// ═══════════════════════════════════════════════════════
+load()
+renderPlanning()
+</script>
+</body>
+</html>
