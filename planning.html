@@ -8,86 +8,85 @@
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --navy:#003366;--navy2:#004080;--navy3:#1a4a8a;
+  --navy:#003366;--navy2:#004080;
   --g50:#f8fafc;--g100:#f1f5f9;--g200:#e2e8f0;--g300:#cbd5e1;
   --g400:#94a3b8;--g500:#64748b;--g600:#475569;--g700:#334155;--g800:#1e293b;
   --sh:0 1px 3px rgba(0,0,0,.08),0 1px 2px rgba(0,0,0,.05);
-  --sh2:0 4px 16px rgba(0,0,0,.1);--sh3:0 20px 50px rgba(0,0,0,.2);
-  --r:10px
+  --sh2:0 4px 16px rgba(0,0,0,.1);--r:10px
 }
-body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:#eef2f7;color:var(--g800);min-height:100vh;font-size:14px}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:#eef2f7;color:var(--g800);min-height:100vh;font-size:14px}
 
-/* ── HEADER ─────────────────────────────────────────── */
+/* HEADER */
 header{background:linear-gradient(135deg,#002855 0%,#003d80 100%);position:sticky;top:0;z-index:300;box-shadow:0 2px 12px rgba(0,0,60,.35)}
 .hdr{display:flex;align-items:center;justify-content:space-between;height:60px;max-width:1500px;margin:0 auto;padding:0 24px}
 .logo{display:flex;align-items:center;gap:10px}
 .logo-ic{background:rgba(255,255,255,.13);width:38px;height:38px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px}
-.logo-txt h1{color:#fff;font-size:15px;font-weight:700;letter-spacing:-.2px}
+.logo-txt h1{color:#fff;font-size:15px;font-weight:700}
 .logo-txt p{color:rgba(255,255,255,.5);font-size:10.5px;margin-top:1px}
 .nav{display:flex;gap:2px;background:rgba(255,255,255,.1);padding:4px;border-radius:10px}
-.nav-btn{padding:7px 16px;border-radius:7px;border:none;cursor:pointer;font-size:12.5px;font-weight:500;transition:.15s;color:rgba(255,255,255,.75);background:transparent;display:flex;align-items:center;gap:6px}
+.nav-btn{padding:7px 14px;border-radius:7px;border:none;cursor:pointer;font-size:12px;font-weight:500;transition:.15s;color:rgba(255,255,255,.75);background:transparent;display:flex;align-items:center;gap:5px;white-space:nowrap}
 .nav-btn.on{background:#fff;color:var(--navy);font-weight:600}
 .nav-btn:hover:not(.on){background:rgba(255,255,255,.15);color:#fff}
 
-/* ── MAIN ─────────────────────────────────────────── */
+/* MAIN */
 main{max-width:1500px;margin:0 auto;padding:20px 24px}
 .tab{display:none}.tab.on{display:block}
 
-/* ── CARD ─────────────────────────────────────────── */
+/* CARD */
 .card{background:#fff;border-radius:12px;border:1px solid var(--g200);box-shadow:var(--sh)}
 
-/* ── BUTTONS ─────────────────────────────────────── */
+/* BUTTONS */
 .btn{display:inline-flex;align-items:center;gap:6px;padding:8px 14px;border-radius:8px;border:none;cursor:pointer;font-size:12.5px;font-weight:500;transition:.15s;white-space:nowrap;line-height:1}
-.btn svg{flex-shrink:0}
 .b-navy{background:var(--navy);color:#fff}.b-navy:hover{background:var(--navy2)}
 .b-gray{background:#fff;color:var(--g700);border:1px solid var(--g200);box-shadow:var(--sh)}.b-gray:hover{background:var(--g50)}
 .b-green{background:#16a34a;color:#fff}.b-green:hover{background:#15803d}
 .b-red{background:#dc2626;color:#fff}.b-red:hover{background:#b91c1c}
 .b-amber{background:#d97706;color:#fff}.b-amber:hover{background:#b45309}
+.b-indigo{background:#4f46e5;color:#fff}.b-indigo:hover{background:#4338ca}
 .btn:disabled{opacity:.35;cursor:not-allowed}
 
-/* ── TOP BAR ─────────────────────────────────────── */
+/* TOP BAR */
 .topbar{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-bottom:14px}
 .spacer{flex:1}
 
-/* ── WEEK NAV ────────────────────────────────────── */
+/* WEEK NAV */
 .wnav{display:flex;align-items:center;background:#fff;border:1px solid var(--g200);border-radius:var(--r);overflow:hidden;box-shadow:var(--sh)}
 .wnav button{padding:10px 12px;border:none;background:transparent;cursor:pointer;color:var(--g500);transition:.1s;font-size:17px;line-height:1}
-.wnav button:hover{background:var(--g100);color:var(--g700)}
+.wnav button:hover{background:var(--g100)}
 .winfo{padding:6px 14px;text-align:center;min-width:190px;border-left:1px solid var(--g100);border-right:1px solid var(--g100)}
 .wnum{font-size:10px;color:var(--g400);font-weight:700;text-transform:uppercase;letter-spacing:.06em}
 .wrange{font-size:13px;font-weight:700;color:var(--g700);margin-top:1px}
 
-/* ── ADD BAR ─────────────────────────────────────── */
+/* ADD BAR */
 .addbar{display:flex;align-items:center;gap:6px;background:#fff;border:1px solid var(--g200);border-radius:var(--r);padding:4px 10px 4px 12px;box-shadow:var(--sh)}
 .addbar select{border:none;outline:none;font-size:12.5px;color:var(--g700);min-width:220px;background:transparent;cursor:pointer}
 
-/* ── LEGEND ──────────────────────────────────────── */
-.legend{display:flex;flex-wrap:wrap;gap:5px;align-items:center;padding:9px 14px;margin-bottom:14px}
+/* LEGEND */
+.legend-bar{display:flex;flex-wrap:wrap;gap:5px;align-items:center;padding:9px 14px;margin-bottom:14px}
 .leg-lbl{font-size:10px;font-weight:700;color:var(--g400);text-transform:uppercase;letter-spacing:.06em;margin-right:2px}
 .sbadge{display:inline-flex;flex-direction:column;align-items:center;border-radius:6px;padding:2px 7px;font-size:11px;font-weight:700}
 .sbadge .sd{font-size:9px;font-weight:400;opacity:.8}
 
-/* ── PLANNING GRID ───────────────────────────────── */
+/* PLANNING GRID */
 .grid-wrap{overflow-x:auto;border-radius:12px;border:1px solid var(--g200);box-shadow:var(--sh)}
 .ptable{width:100%;border-collapse:collapse;background:#fff}
 .ptable thead th{background:var(--navy);color:#fff;font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;padding:10px 5px;text-align:center;border-right:1px solid rgba(255,255,255,.07);position:sticky;top:60px;z-index:10}
 .ptable thead th.emp-h{text-align:left;padding-left:14px;min-width:190px;position:sticky;left:0;top:60px;z-index:15;background:var(--navy)}
 .ptable thead th.we{background:#1a3a5c;color:#7a9fc0}
-.ptable tbody tr:hover td{background:#f0f7ff}
-.ptable tbody tr:hover .emp-td{background:#e8f1fc}
+.ptable tbody tr:hover td{background:#f0f7ff!important}
+.ptable tbody tr:hover .emp-td{background:#e8f1fc!important}
 .ptable tbody tr:nth-child(even) td{background:var(--g50)}
 .ptable tbody tr:nth-child(even) .emp-td{background:var(--g50)}
 .ptable tbody tr:nth-child(odd) .emp-td{background:#fff}
 .ptable td{border-right:1px solid var(--g100);border-bottom:1px solid var(--g100);vertical-align:middle}
 .emp-td{position:sticky;left:0;z-index:5;padding:8px 12px;min-width:190px;border-right:2px solid var(--g200)!important}
-.emp-name{font-weight:700;font-size:13px;line-height:1.2;color:var(--g800)}
+.emp-name{font-weight:700;font-size:13px;line-height:1.2}
 .role-pill{display:inline-block;font-size:10px;padding:2px 8px;border-radius:20px;margin-top:3px;font-weight:600}
 .shift-td{text-align:center;padding:3px;min-width:118px}
 .shift-td.we{background:rgba(240,244,248,.6)!important}
-.cell-btn{width:100%;min-height:54px;border:none;background:transparent;cursor:pointer;border-radius:8px;padding:3px;transition:box-shadow .1s,background .1s;display:flex;align-items:center;justify-content:center}
-.cell-btn:hover{box-shadow:0 0 0 2px #3b82f6;background:rgba(59,130,246,.04)}
-.cell-empty{color:var(--g300);font-size:22px;user-select:none}
+.cell-btn{width:100%;min-height:54px;border:none;background:transparent;cursor:pointer;border-radius:8px;padding:3px;transition:box-shadow .1s;display:flex;align-items:center;justify-content:center}
+.cell-btn:hover{box-shadow:0 0 0 2px #3b82f6}
+.cell-empty{color:var(--g300);font-size:22px}
 .cbadge{border-radius:7px;padding:5px 6px;text-align:center;width:100%}
 .cbadge .cc{font-weight:800;font-size:13px;line-height:1.2}
 .cbadge .ct{font-size:9px;opacity:.82;margin-top:1px}
@@ -99,31 +98,87 @@ main{max-width:1500px;margin:0 auto;padding:20px 24px}
 .empty-grid{text-align:center;padding:60px 20px;color:var(--g400)}
 .empty-grid .ei{font-size:54px;margin-bottom:12px}
 .empty-grid h3{font-size:17px;font-weight:600;color:var(--g500);margin-bottom:7px}
-.empty-grid p{font-size:13px}
 .tip{text-align:center;font-size:11px;color:var(--g400);margin-top:8px}
 
-/* ── SHIFT POPUP ─────────────────────────────────── */
+/* SHIFT POPUP */
 #spop{position:fixed;z-index:9999;background:#fff;border-radius:14px;box-shadow:0 20px 50px rgba(0,0,0,.22),0 0 0 1px rgba(0,0,0,.06);padding:13px;width:310px}
 .pop-arrow{position:absolute;width:12px;height:12px;background:#fff;border-left:1px solid var(--g200);border-top:1px solid var(--g200);transform:rotate(45deg);top:-7px;left:50%;margin-left:-6px}
 .pop-head{font-size:10px;font-weight:700;color:var(--g400);text-transform:uppercase;letter-spacing:.07em;padding:2px 0 6px;border-bottom:1px solid var(--g100);margin-bottom:8px}
 .pop-group{font-size:10px;font-weight:700;color:var(--g400);text-transform:uppercase;letter-spacing:.07em;margin:8px 0 5px}
 .pop-group:first-of-type{margin-top:0}
 .pop-shifts{display:flex;flex-wrap:wrap;gap:5px}
-.psbtn{border:none;cursor:pointer;border-radius:7px;padding:5px 10px;text-align:left;transition:transform .1s,box-shadow .1s;min-width:70px}
+.psbtn{border:none;cursor:pointer;border-radius:7px;padding:5px 10px;transition:transform .1s,box-shadow .1s;min-width:70px}
 .psbtn:hover{transform:scale(1.07);box-shadow:0 3px 10px rgba(0,0,0,.2)}
 .psbtn .ps-c{font-weight:800;font-size:12px}
 .psbtn .ps-d{font-size:9px;opacity:.85;margin-top:1px}
 .pop-clear{display:flex;align-items:center;gap:5px;border:none;background:none;cursor:pointer;color:var(--g400);font-size:11.5px;padding:8px 2px 2px;border-top:1px solid var(--g100);width:100%;margin-top:8px;transition:color .1s}
 .pop-clear:hover{color:#dc2626}
 
-/* ── PERSONNEL ───────────────────────────────────── */
-.ph{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px}
+/* CONGÉS TAB */
+.cg-table-wrap{overflow-x:auto;border-radius:12px;border:1px solid var(--g200);box-shadow:var(--sh)}
+.cg-table{width:100%;border-collapse:collapse;background:#fff}
+.cg-table thead th{background:var(--navy);color:#fff;font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;padding:10px 5px;text-align:center;border-right:1px solid rgba(255,255,255,.07);position:sticky;top:60px;z-index:10}
+.cg-table thead th.emp-h{text-align:left;padding-left:14px;min-width:180px;position:sticky;left:0;top:60px;z-index:15;background:var(--navy)}
+.cg-table thead th.we{background:#1a3a5c;color:#7a9fc0}
+.cg-table td{border-right:1px solid var(--g100);border-bottom:1px solid var(--g100);vertical-align:middle}
+.cg-role-hdr td{background:#f0f4f8!important;font-size:10.5px;font-weight:700;color:var(--g600);text-transform:uppercase;letter-spacing:.05em;padding:5px 14px;border-top:2px solid var(--g200)}
+.cg-emp-td{position:sticky;left:0;z-index:5;padding:7px 12px;min-width:180px;border-right:2px solid var(--g200)!important;background:#fff}
+.cg-table tr:nth-child(even) .cg-emp-td{background:var(--g50)}
+.cg-table tr:nth-child(even) td{background:var(--g50)}
+.cg-cell{text-align:center;padding:4px;min-width:100px}
+.cg-cell.we{background:rgba(240,244,248,.5)!important}
+.cg-badge{display:inline-block;border-radius:6px;padding:3px 8px;font-size:10.5px;font-weight:700}
+.cg-ok{color:#94a3b8;font-size:18px}
+.cg-overlap-row td{background:#fff7ed!important;border-top:2px solid #fed7aa}
+.cg-overlap-td{position:sticky;left:0;z-index:5;padding:6px 12px;background:#fff7ed!important;font-size:10.5px;font-weight:700;color:#c2410c;border-right:2px solid var(--g200)!important}
+.cg-overlap-cell{text-align:center;padding:4px}
+.cg-overlap-badge{display:inline-block;background:#fee2e2;color:#dc2626;border:1px solid #fca5a5;border-radius:6px;padding:2px 7px;font-size:10px;font-weight:700}
+.cg-stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;margin-bottom:16px}
+.cg-stat{background:#fff;border-radius:10px;border:1px solid var(--g200);padding:12px 16px;box-shadow:var(--sh)}
+.cg-stat-n{font-size:26px;font-weight:800;line-height:1}
+.cg-stat-l{font-size:11px;color:var(--g500);margin-top:4px}
+.cg-empty{text-align:center;padding:50px 20px;color:var(--g400)}
+.cg-empty .ei{font-size:44px;margin-bottom:10px}
+
+/* EFFECTIFS TAB */
+.eff-table-wrap{overflow-x:auto;border-radius:12px;border:1px solid var(--g200);box-shadow:var(--sh)}
+.eff-table{width:100%;border-collapse:collapse;background:#fff}
+.eff-table thead th{background:var(--navy);color:#fff;font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;padding:10px 6px;text-align:center;border-right:1px solid rgba(255,255,255,.08);position:sticky;top:60px;z-index:10}
+.eff-table thead th.rh{text-align:left;padding-left:14px;min-width:175px;position:sticky;left:0;top:60px;z-index:15;background:var(--navy)}
+.eff-table thead th.we{background:#1a3a5c;color:#7a9fc0}
+.eff-table td{border-right:1px solid var(--g100);border-bottom:1px solid var(--g100);vertical-align:middle}
+.eff-table tr:nth-child(even) td{background:var(--g50)}
+.eff-table tr:nth-child(even) .rh-td{background:var(--g50)}
+.eff-table tr:nth-child(odd) .rh-td{background:#fff}
+.rh-td{position:sticky;left:0;z-index:5;padding:8px 14px;min-width:175px;border-right:2px solid var(--g200)!important}
+.rh-td .rh-name{font-weight:700;font-size:13px;color:var(--g800)}
+.rh-td .rh-count{font-size:10.5px;color:var(--g500);margin-top:2px}
+.eff-cell{text-align:center;padding:5px 4px;min-width:110px}
+.eff-cell.we{background:rgba(240,244,248,.5)!important}
+.eff-badge{display:inline-flex;flex-direction:column;align-items:center;border-radius:10px;padding:6px 10px;min-width:84px;width:100%}
+.eff-actual{font-size:22px;font-weight:800;line-height:1.1}
+.eff-sub{font-size:9.5px;opacity:.85;margin-top:2px;line-height:1.4}
+.eff-sub span{cursor:pointer;text-decoration:underline dotted}
+.eff-absent-pill{display:inline-block;background:rgba(0,0,0,.08);border-radius:3px;padding:0 4px;font-size:9px;font-weight:700;margin-left:3px}
+.eff-total-row td{background:#e8edf4!important;border-top:2px solid var(--g300)}
+.eff-total-row .rh-td{background:#e8edf4!important;font-size:11px;font-weight:700;color:var(--g500);text-transform:uppercase;letter-spacing:.05em}
+.eff-summary{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin-bottom:16px}
+.eff-stat{background:#fff;border-radius:10px;border:1px solid var(--g200);padding:12px 16px;box-shadow:var(--sh)}
+.eff-stat-n{font-size:26px;font-weight:800;line-height:1}
+.eff-stat-l{font-size:11px;color:var(--g500);margin-top:4px}
+.eff-info{font-size:12px;color:var(--g500);line-height:1.5;padding:10px 14px;background:#f0f7ff;border-radius:10px;border:1px solid #bfdbfe;margin-bottom:16px}
+.eff-key{display:flex;gap:16px;align-items:center;margin-top:12px;justify-content:center;flex-wrap:wrap}
+.eff-key-item{display:flex;align-items:center;gap:6px;font-size:11px;color:var(--g500)}
+.eff-key-dot{width:12px;height:12px;border-radius:3px}
+
+/* PERSONNEL */
+.ph{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px;flex-wrap:wrap;gap:10px}
 .pt{display:flex;align-items:center;gap:12px}
 .pt-ic{background:var(--navy);color:#fff;width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:20px}
-.pt h2{font-size:20px;font-weight:700;color:var(--g800)}
+.pt h2{font-size:20px;font-weight:700}
 .pt p{font-size:12px;color:var(--g500);margin-top:2px}
 .pcards{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:18px}
-.pcard{border-radius:12px;padding:12px 14px;cursor:pointer;transition:.15s;border:2px solid transparent;flex:0 0 auto;min-width:130px}
+.pcard{border-radius:12px;padding:12px 14px;cursor:pointer;transition:.15s;border:2px solid transparent;flex:0 0 auto}
 .pcard:hover{transform:translateY(-2px);box-shadow:var(--sh2)}
 .pcard.active{box-shadow:var(--sh2);border-color:currentColor!important;transform:translateY(-2px)}
 .pcard-n{font-size:24px;font-weight:800}
@@ -138,41 +193,10 @@ main{max-width:1500px;margin:0 auto;padding:20px 24px}
 .ic-btn.ed:hover{color:#2563eb;background:#eff6ff}
 .ic-btn.dl:hover{color:#dc2626;background:#fee2e2}
 
-/* ── EFFECTIFS ───────────────────────────────────── */
-.eff-info{font-size:12px;color:var(--g500);line-height:1.5;padding:12px 16px;background:#f0f7ff;border-radius:10px;border:1px solid #bfdbfe;margin-bottom:16px}
-.eff-info strong{color:var(--navy)}
-.eff-table-wrap{overflow-x:auto;border-radius:12px;border:1px solid var(--g200);box-shadow:var(--sh)}
-.eff-table{width:100%;border-collapse:collapse;background:#fff}
-.eff-table thead th{background:var(--navy);color:#fff;font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;padding:10px 6px;text-align:center;border-right:1px solid rgba(255,255,255,.08);position:sticky;top:60px;z-index:10}
-.eff-table thead th.rh{text-align:left;padding-left:14px;min-width:170px;position:sticky;left:0;top:60px;z-index:15;background:var(--navy)}
-.eff-table thead th.we{background:#1a3a5c;color:#7a9fc0}
-.eff-table td{border-right:1px solid var(--g100);border-bottom:1px solid var(--g100);vertical-align:middle}
-.eff-table tr:nth-child(even) td{background:var(--g50)}
-.eff-table tr:nth-child(even) .rh-td{background:var(--g50)}
-.eff-table tr:nth-child(odd) .rh-td{background:#fff}
-.rh-td{position:sticky;left:0;z-index:5;padding:8px 14px;min-width:170px;border-right:2px solid var(--g200)!important;display:table-cell}
-.rh-td .role-name{font-weight:700;font-size:13px;color:var(--g800)}
-.eff-cell{text-align:center;padding:6px 4px;min-width:110px}
-.eff-cell.we{background:rgba(240,244,248,.5)!important}
-.eff-badge{display:inline-flex;flex-direction:column;align-items:center;border-radius:10px;padding:6px 12px;min-width:80px;cursor:default}
-.eff-badge .eff-actual{font-size:20px;font-weight:800;line-height:1.1}
-.eff-badge .eff-req{font-size:10px;opacity:.8;margin-top:1px}
-.eff-badge .eff-req input{width:28px;border:none;background:transparent;text-align:center;font-size:10px;color:inherit;cursor:pointer;outline:none;font-weight:600}
-.eff-badge .eff-req input:focus{background:rgba(255,255,255,.4);border-radius:4px}
-.eff-total-row td{background:#e8edf4!important;border-top:2px solid var(--g300)}
-.eff-total-row .rh-td{background:#e8edf4!important;font-size:11px;font-weight:700;color:var(--g500);text-transform:uppercase;letter-spacing:.05em}
-.eff-key{display:flex;gap:16px;align-items:center;margin-top:12px;justify-content:center}
-.eff-key-item{display:flex;align-items:center;gap:6px;font-size:11px;color:var(--g500)}
-.eff-key-dot{width:12px;height:12px;border-radius:3px}
-.eff-summary{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px;margin-bottom:16px}
-.eff-stat{background:#fff;border-radius:10px;border:1px solid var(--g200);padding:12px 16px;box-shadow:var(--sh)}
-.eff-stat-n{font-size:26px;font-weight:800;line-height:1}
-.eff-stat-l{font-size:11px;color:var(--g500);margin-top:4px}
-
-/* ── MODAL ───────────────────────────────────────── */
+/* MODAL */
 .modal-bg{display:none;position:fixed;inset:0;z-index:500;background:rgba(0,0,0,.45);backdrop-filter:blur(4px);align-items:center;justify-content:center}
 .modal-bg.open{display:flex}
-.modal{background:#fff;border-radius:18px;width:100%;max-width:430px;margin:16px;overflow:hidden;box-shadow:var(--sh3)}
+.modal{background:#fff;border-radius:18px;width:100%;max-width:430px;margin:16px;overflow:hidden;box-shadow:0 25px 50px rgba(0,0,0,.25)}
 .mhdr{background:var(--navy);color:#fff;padding:16px 20px;display:flex;align-items:center;justify-content:space-between}
 .mhdr h3{font-size:15px;font-weight:600}
 .mcls{background:none;border:none;color:rgba(255,255,255,.7);cursor:pointer;font-size:20px;padding:2px 6px;border-radius:6px;transition:.1s}
@@ -191,7 +215,7 @@ main{max-width:1500px;margin:0 auto;padding:20px 24px}
 .confirm-actions{display:flex;gap:10px}
 .confirm-actions .btn{flex:1;justify-content:center}
 
-/* ── SCROLLBAR ───────────────────────────────────── */
+/* SCROLLBAR */
 ::-webkit-scrollbar{height:5px;width:5px}
 ::-webkit-scrollbar-track{background:var(--g100);border-radius:10px}
 ::-webkit-scrollbar-thumb{background:var(--g300);border-radius:10px}
@@ -213,6 +237,10 @@ main{max-width:1500px;margin:0 auto;padding:20px 24px}
         <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
         Planning
       </button>
+      <button class="nav-btn" data-tab="conges" onclick="setTab('conges')">
+        <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="23" y1="11" x2="17" y2="11"/><line x1="20" y1="8" x2="20" y2="14"/></svg>
+        Congés
+      </button>
       <button class="nav-btn" data-tab="effectifs" onclick="setTab('effectifs')">
         <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
         Effectifs Jour
@@ -227,6 +255,7 @@ main{max-width:1500px;margin:0 auto;padding:20px 24px}
 
 <main>
   <div id="tab-planning"  class="tab on"></div>
+  <div id="tab-conges"    class="tab"></div>
   <div id="tab-effectifs" class="tab"></div>
   <div id="tab-personnel" class="tab"></div>
 </main>
@@ -240,19 +269,10 @@ main{max-width:1500px;margin:0 auto;padding:20px 24px}
     </div>
     <div class="mbody">
       <div class="frow">
-        <div class="fg">
-          <label>Prénom</label>
-          <input id="f-prenom" class="fc" placeholder="Prénom" oninput="validateEmpForm()">
-        </div>
-        <div class="fg">
-          <label>Nom</label>
-          <input id="f-nom" class="fc" placeholder="NOM" oninput="validateEmpForm()" style="text-transform:uppercase">
-        </div>
+        <div class="fg"><label>Prénom</label><input id="f-prenom" class="fc" placeholder="Prénom" oninput="validateEmpForm()"></div>
+        <div class="fg"><label>Nom</label><input id="f-nom" class="fc" placeholder="NOM" oninput="validateEmpForm()" style="text-transform:uppercase"></div>
       </div>
-      <div class="fg">
-        <label>Poste</label>
-        <select id="f-poste" class="fc" onchange="validateEmpForm()"></select>
-      </div>
+      <div class="fg"><label>Poste</label><select id="f-poste" class="fc" onchange="validateEmpForm()"></select></div>
     </div>
     <div class="mfoot">
       <button class="btn b-gray" onclick="closeEmpModal()">Annuler</button>
@@ -275,6 +295,9 @@ main{max-width:1500px;margin:0 auto;padding:20px 24px}
     </div>
   </div>
 </div>
+
+<!-- Hidden file input for employee import -->
+<input type="file" id="import-file" accept=".json" style="display:none" onchange="handleImport(event)">
 
 <script>
 // ═══════════════════════════════════════════════════════
@@ -309,13 +332,12 @@ const SHIFTS = [
   {code:'MAL',label:'Maladie',    detail:'',          groupe:'Absence', bg:'#FFE4E6',tx:'#9F1239',bd:'#F43F5E'},
   {code:'ABS',label:'Absence',    detail:'',          groupe:'Absence', bg:'#FEE2E2',tx:'#991B1B',bd:'#EF4444'},
 ]
-const SBC   = Object.fromEntries(SHIFTS.map(s=>[s.code,s]))
+const SBC    = Object.fromEntries(SHIFTS.map(s=>[s.code,s]))
 const GROUPS = [...new Set(SHIFTS.map(s=>s.groupe))]
-const DAYS  = ['Lun','Mar','Mer','Jeu','Ven','Sam','Dim']
-// Working shifts (not absences)
-const WORK  = new Set(['M1','AM1','N1','M2','AM2','N2','J'])
+const DAYS   = ['Lun','Mar','Mer','Jeu','Ven','Sam','Dim']
+const WORK   = new Set(['M1','AM1','N1','M2','AM2','N2','J'])
+const ABS_CODES = new Set(['CP','RTT','FM','MAL','ABS','R'])
 
-// Default staffing needs per role per day [Mon-Sun]
 const DEFAULT_BESOINS = {
   'Coordinateur':        [1,1,1,1,1,0,0],
   'Réception':           [3,3,3,3,3,1,0],
@@ -331,21 +353,13 @@ const DEFAULT_BESOINS = {
 //  DATE UTILS
 // ═══════════════════════════════════════════════════════
 function weekStart(d=new Date()){
-  const x=new Date(d), day=x.getDay()
+  const x=new Date(d),day=x.getDay()
   x.setDate(x.getDate()-day+(day===0?-6:1))
   x.setHours(0,0,0,0); return x.toISOString().slice(0,10)
 }
-function addDays(s,n){
-  const d=new Date(s); d.setDate(d.getDate()+n); return d.toISOString().slice(0,10)
-}
-function weekDays(ws){
-  const m=new Date(ws)
-  return Array.from({length:7},(_,i)=>{const d=new Date(m);d.setDate(m.getDate()+i);return d})
-}
-function weekNum(ws){
-  const d=new Date(ws); d.setDate(d.getDate()+4-(d.getDay()||7))
-  return Math.ceil((((d-new Date(d.getFullYear(),0,1))/864e5)+1)/7)
-}
+function addDays(s,n){const d=new Date(s);d.setDate(d.getDate()+n);return d.toISOString().slice(0,10)}
+function weekDays(ws){const m=new Date(ws);return Array.from({length:7},(_,i)=>{const d=new Date(m);d.setDate(m.getDate()+i);return d})}
+function weekNum(ws){const d=new Date(ws);d.setDate(d.getDate()+4-(d.getDay()||7));return Math.ceil((((d-new Date(d.getFullYear(),0,1))/864e5)+1)/7)}
 function fmt(d){return d.toLocaleDateString('fr-FR',{day:'2-digit',month:'2-digit'})}
 function fmtL(d){return d.toLocaleDateString('fr-FR',{day:'2-digit',month:'long',year:'numeric'})}
 
@@ -379,72 +393,78 @@ let state = {
   confirmCb: null,
 }
 
+// Captures the selected employee ID when the dropdown changes
+// This avoids any race condition between select value and button click
+let _pendingEmpId = ''
+
 // ═══════════════════════════════════════════════════════
 //  SAVE / LOAD
 // ═══════════════════════════════════════════════════════
 function save(){
-  try{
-    localStorage.setItem('planning-v4', JSON.stringify({
-      employees: state.employees,
-      plannings: state.plannings,
-      besoins:   state.besoins,
-    }))
-  }catch(e){}
+  try{localStorage.setItem('planning-v4',JSON.stringify({employees:state.employees,plannings:state.plannings,besoins:state.besoins}))}catch(e){}
 }
 function load(){
   try{
-    const raw = localStorage.getItem('planning-v4')
-      || localStorage.getItem('planning-v3') // migrate old data
+    const raw=localStorage.getItem('planning-v4')||localStorage.getItem('planning-v3')
     if(!raw) return
-    const s = JSON.parse(raw)
-    if(s.employees) state.employees = s.employees
-    if(s.plannings) state.plannings = s.plannings
-    if(s.besoins)   state.besoins   = s.besoins
-    // Ensure all roles exist in besoins
-    ROLES.forEach(r=>{ if(!state.besoins[r]) state.besoins[r]=[...DEFAULT_BESOINS[r]] })
+    const s=JSON.parse(raw)
+    if(s&&s.employees) state.employees=s.employees
+    if(s&&s.plannings) state.plannings=s.plannings
+    if(s&&s.besoins)   state.besoins=s.besoins
+    ROLES.forEach(r=>{if(!state.besoins[r]) state.besoins[r]=[...DEFAULT_BESOINS[r]]})
   }catch(e){}
 }
 
 // ═══════════════════════════════════════════════════════
 //  PLANNING ACTIONS
 // ═══════════════════════════════════════════════════════
-function planRows(){
-  return state.plannings[state.week] || []
+function planRows(){ return state.plannings[state.week]||[] }
+
+// Called by the select's onchange — captures the ID immediately
+function onEmpSelChange(val){
+  _pendingEmpId = String(val||'').trim()
 }
 
-// Called by button onclick - reads select then clears it
+// Called by the Add button — uses the captured ID
 function doAdd(){
+  const empId = _pendingEmpId
+  _pendingEmpId = ''
+  // Reset the visible select
   const sel = document.getElementById('add-emp-sel')
-  if(!sel) return
-  const empId = String(sel.value).trim()
+  if(sel) sel.value = ''
   if(!empId) return
+
+  // Verify employee exists in state before adding
+  const exists = state.employees.some(e => String(e.id) === empId)
+  if(!exists) return
+
   const rows = planRows()
-  if(rows.find(r => String(r.employeeId) === empId)) { sel.value=''; return }
-  state.plannings[state.week] = [...rows, {employeeId: empId, shifts: Array(7).fill(null)}]
+  // Already in this week's planning
+  if(rows.some(r => String(r.employeeId) === empId)) return
+
+  state.plannings[state.week] = [...rows, {employeeId: empId, shifts: [null,null,null,null,null,null,null]}]
   save()
-  sel.value = ''
   renderPlanning()
 }
 
 function removeRow(i){
-  const rows = [...planRows()]; rows.splice(i,1)
-  state.plannings[state.week] = rows; save(); renderPlanning()
+  const rows=[...planRows()]; rows.splice(i,1)
+  state.plannings[state.week]=rows; save(); renderPlanning()
 }
 
-function setShift(rowIdx, dayIdx, code){
-  const rows = planRows().map((r,i) => {
-    if(i !== rowIdx) return r
-    const s = [...r.shifts]; s[dayIdx] = code; return {...r, shifts:s}
+function setShift(rowIdx,dayIdx,code){
+  const rows=planRows().map((r,i)=>{
+    if(i!==rowIdx) return r
+    const s=[...r.shifts]; s[dayIdx]=code; return {...r,shifts:s}
   })
-  state.plannings[state.week] = rows; save(); renderPlanning()
+  state.plannings[state.week]=rows; save(); renderPlanning()
 }
 
 function copyPrev(){
-  const prev = addDays(state.week,-7)
-  const pr   = state.plannings[prev]
-  if(!pr || !pr.length){ alert('Aucun planning la semaine précédente.'); return }
-  if(planRows().length && !confirm('Écraser le planning de cette semaine ?')) return
-  state.plannings[state.week] = pr.map(r => ({...r, shifts:[...r.shifts]}))
+  const prev=addDays(state.week,-7), pr=state.plannings[prev]
+  if(!pr||!pr.length){alert('Aucun planning la semaine précédente.');return}
+  if(planRows().length&&!confirm('Écraser le planning de cette semaine ?')) return
+  state.plannings[state.week]=pr.map(r=>({...r,shifts:[...r.shifts]}))
   save(); renderPlanning()
 }
 
@@ -452,645 +472,502 @@ function copyPrev(){
 //  RENDER PLANNING
 // ═══════════════════════════════════════════════════════
 function renderPlanning(){
-  const rows = planRows()
-  const days = weekDays(state.week)
-  const wn   = weekNum(state.week)
-  const used = new Set(rows.map(r => String(r.employeeId)))
-  const avail = state.employees.filter(e => !used.has(String(e.id)))
+  const rows=planRows(), days=weekDays(state.week), wn=weekNum(state.week)
+  const used=new Set(rows.map(r=>String(r.employeeId)))
+  const avail=state.employees.filter(e=>!used.has(String(e.id)))
 
-  // Legend
-  const legHtml = SHIFTS.map(s=>`
-    <span class="sbadge" style="background:${s.bg};color:${s.tx};border:1px solid ${s.bd}">
-      ${s.code}${s.detail?`<span class="sd"> ${s.detail}</span>`:''}
-    </span>`).join('')
+  const legHtml=SHIFTS.map(s=>`<span class="sbadge" style="background:${s.bg};color:${s.tx};border:1px solid ${s.bd}">${s.code}${s.detail?`<span class="sd"> ${s.detail}</span>`:''}</span>`).join('')
 
-  // Days header
-  const thDays = days.map((d,i)=>`
-    <th class="${i>=5?'we':''}" style="min-width:118px">
-      ${DAYS[i]}<br><span style="font-weight:400;opacity:.7;font-size:9.5px">${fmt(d)}</span>
-    </th>`).join('')
+  const thDays=days.map((d,i)=>`<th class="${i>=5?'we':''}" style="min-width:118px">${DAYS[i]}<br><span style="font-weight:400;opacity:.7;font-size:9.5px">${fmt(d)}</span></th>`).join('')
 
-  // Build rows
   let tbRows
-  if(rows.length === 0){
-    tbRows = `<tr><td colspan="9">
-      <div class="empty-grid">
-        <div class="ei">📋</div>
-        <h3>Planning vide</h3>
-        <p>Ajoutez des employés via le menu ci-dessus pour commencer.</p>
-      </div></td></tr>`
+  if(!rows.length){
+    tbRows=`<tr><td colspan="9"><div class="empty-grid"><div class="ei">📋</div><h3>Planning vide</h3><p>Ajoutez des employés ci-dessus.</p></div></td></tr>`
   } else {
-    tbRows = rows.map((row, ri) => {
-      const emp = state.employees.find(e => String(e.id) === String(row.employeeId))
-      if(!emp) return `<tr><td colspan="9" style="padding:8px 14px;font-size:12px;color:#ef4444">
-        ⚠ Employé introuvable (id:${row.employeeId}) — <button class="btn b-gray" style="padding:3px 8px;font-size:11px" onclick="removeRow(${ri})">Retirer</button>
-      </td></tr>`
-      const rc = ROLE_CLR[emp.poste] || {bg:'#F1F5F9',tx:'#475569',bd:'#CBD5E1'}
-      const cells = row.shifts.map((code, di) => {
-        const we = di >= 5
-        const s  = code ? SBC[code] : null
-        const inner = s
-          ? `<div class="cbadge" style="background:${s.bg};color:${s.tx};border:1.5px solid ${s.bd}">
-              <div class="cc">${s.code}</div>
-              ${s.detail?`<div class="ct">${s.detail}</div>`:''}
-             </div>`
-          : `<span class="cell-empty">—</span>`
-        return `<td class="shift-td${we?' we':''}">
-          <button class="cell-btn" onclick="openPop(${ri},${di},this)">${inner}</button>
-        </td>`
+    tbRows=rows.map((row,ri)=>{
+      const emp=state.employees.find(e=>String(e.id)===String(row.employeeId))
+      if(!emp) return `<tr><td colspan="9" style="padding:8px 14px;font-size:12px;color:#ef4444">⚠ Employé introuvable — <button class="btn b-gray" style="padding:3px 8px;font-size:11px" onclick="removeRow(${ri})">Retirer</button></td></tr>`
+      const rc=ROLE_CLR[emp.poste]||{bg:'#F1F5F9',tx:'#475569',bd:'#CBD5E1'}
+      const cells=row.shifts.map((code,di)=>{
+        const we=di>=5,s=code?SBC[code]:null
+        const inner=s?`<div class="cbadge" style="background:${s.bg};color:${s.tx};border:1.5px solid ${s.bd}"><div class="cc">${s.code}</div>${s.detail?`<div class="ct">${s.detail}</div>`:''}</div>`:`<span class="cell-empty">—</span>`
+        return `<td class="shift-td${we?' we':''}"><button class="cell-btn" onclick="openPop(${ri},${di},this)">${inner}</button></td>`
       }).join('')
-      return `<tr>
-        <td class="emp-td">
-          <div class="emp-name">${emp.nom} ${emp.prenom}</div>
-          <span class="role-pill" style="background:${rc.bg};color:${rc.tx};border:1px solid ${rc.bd}">${emp.poste}</span>
-        </td>
-        ${cells}
-        <td class="del-td">
-          <button class="del-btn" onclick="removeRow(${ri})" title="Retirer du planning">
-            <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-          </button>
-        </td>
-      </tr>`
+      return `<tr><td class="emp-td"><div class="emp-name">${emp.nom} ${emp.prenom}</div><span class="role-pill" style="background:${rc.bg};color:${rc.tx};border:1px solid ${rc.bd}">${emp.poste}</span></td>${cells}<td class="del-td"><button class="del-btn" onclick="removeRow(${ri})" title="Retirer"><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></td></tr>`
     }).join('')
   }
 
-  // Summary row
-  const sumCells = Array.from({length:7}, (_,di) => {
-    const codes = rows.map(r=>r.shifts[di]).filter(Boolean)
-    const cnt = {}; codes.forEach(c=>{ cnt[c]=(cnt[c]||0)+1 })
-    const badges = Object.entries(cnt).map(([c,n]) => {
-      const s = SBC[c]; if(!s) return ''
-      return `<span style="background:${s.bg};color:${s.tx};border:1px solid ${s.bd};font-size:9px;font-weight:700;padding:2px 5px;border-radius:4px;display:inline-block;margin:1px">${c}×${n}</span>`
-    }).join('')
+  const sumCells=Array.from({length:7},(_,di)=>{
+    const codes=rows.map(r=>r.shifts[di]).filter(Boolean)
+    const cnt={}; codes.forEach(c=>{cnt[c]=(cnt[c]||0)+1})
+    const badges=Object.entries(cnt).map(([c,n])=>{const s=SBC[c];if(!s)return '';return `<span style="background:${s.bg};color:${s.tx};border:1px solid ${s.bd};font-size:9px;font-weight:700;padding:2px 5px;border-radius:4px;display:inline-block;margin:1px">${c}×${n}</span>`}).join('')
     return `<td class="sum-td">${badges||'<span style="color:#ccc;font-size:11px">—</span>'}</td>`
   }).join('')
+  const sumRow=rows.length?`<tr class="sum-row"><td class="emp-td" style="font-size:10px;font-weight:700;color:#94a3b8;text-transform:uppercase;letter-spacing:.05em">Effectifs / jour</td>${sumCells}<td></td></tr>`:''
 
-  const sumRow = rows.length > 0
-    ? `<tr class="sum-row">
-        <td class="emp-td" style="font-size:10px;font-weight:700;color:#94a3b8;text-transform:uppercase;letter-spacing:.05em">Effectifs / jour</td>
-        ${sumCells}<td></td>
-       </tr>` : ''
+  const opts=avail.length
+    ? `<option value="">— Choisir un employé —</option>`+avail.map(e=>`<option value="${e.id}">${e.nom} ${e.prenom} — ${e.poste}</option>`).join('')
+    : `<option value="">— Tous les employés sont planifiés —</option>`
 
-  // Add employee select
-  const opts = avail.length
-    ? avail.map(e=>`<option value="${e.id}">${e.nom} ${e.prenom} — ${e.poste}</option>`).join('')
-    : `<option value="" disabled>— Tous les employés sont planifiés —</option>`
-
-  const icCal  = `<svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>`
-  const icCopy = `<svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>`
-  const icPDF  = `<svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>`
-  const icXLS  = `<svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><polyline points="8 13 12 17 16 13"/><line x1="12" y1="17" x2="12" y2="11"/></svg>`
-
-  document.getElementById('tab-planning').innerHTML = `
+  document.getElementById('tab-planning').innerHTML=`
   <div class="topbar">
     <div class="wnav">
-      <button onclick="changeWeek(-7)" title="Semaine précédente">&#8249;</button>
-      <div class="winfo">
-        <div class="wnum">Semaine ${wn} · ${days[0].getFullYear()}</div>
-        <div class="wrange">${fmt(days[0])} – ${fmt(days[6])}</div>
-      </div>
-      <button onclick="changeWeek(7)" title="Semaine suivante">&#8250;</button>
+      <button onclick="changeWeek(-7)">&#8249;</button>
+      <div class="winfo"><div class="wnum">Semaine ${wn} · ${days[0].getFullYear()}</div><div class="wrange">${fmt(days[0])} – ${fmt(days[6])}</div></div>
+      <button onclick="changeWeek(7)">&#8250;</button>
     </div>
-
-    <button class="btn b-gray" onclick="goToday()">${icCal} Aujourd'hui</button>
-
+    <button class="btn b-gray" onclick="goToday()">
+      <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+      Aujourd'hui
+    </button>
     <div class="addbar">
       <svg width="14" height="14" fill="none" stroke="#94a3b8" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
-      <select id="add-emp-sel">
-        <option value="">— Ajouter un employé au planning —</option>
-        ${opts}
-      </select>
+      <select id="add-emp-sel" onchange="onEmpSelChange(this.value)">${opts}</select>
       <div style="width:1px;height:18px;background:#e2e8f0;flex-shrink:0"></div>
       <button class="btn b-navy" style="padding:6px 12px" onclick="doAdd()">
         <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
         Ajouter
       </button>
     </div>
-
     <div class="spacer"></div>
-
-    <button class="btn b-gray" onclick="copyPrev()">${icCopy} Copier sem. préc.</button>
-    <button class="btn b-red"   onclick="exportPDF()">${icPDF} PDF</button>
-    <button class="btn b-green" onclick="exportExcel()">${icXLS} Excel</button>
+    <button class="btn b-gray" onclick="copyPrev()">
+      <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+      Copier sem. préc.
+    </button>
+    <button class="btn b-red" onclick="exportPDF()">
+      <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+      PDF
+    </button>
+    <button class="btn b-green" onclick="exportExcel()">
+      <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><polyline points="8 13 12 17 16 13"/><line x1="12" y1="17" x2="12" y2="11"/></svg>
+      Excel
+    </button>
   </div>
-
-  <div class="card legend">
-    <span class="leg-lbl">Légende</span>
-    ${legHtml}
-  </div>
-
+  <div class="card legend-bar"><span class="leg-lbl">Légende</span>${legHtml}</div>
   <div class="grid-wrap">
     <table class="ptable">
-      <thead>
-        <tr>
-          <th class="emp-h">Employé / Poste</th>
-          ${thDays}
-          <th style="width:36px;background:var(--navy)"></th>
-        </tr>
-      </thead>
-      <tbody>
-        ${tbRows}
-        ${sumRow}
-      </tbody>
+      <thead><tr><th class="emp-h">Employé / Poste</th>${thDays}<th style="width:36px;background:var(--navy)"></th></tr></thead>
+      <tbody>${tbRows}${sumRow}</tbody>
     </table>
   </div>
-  ${rows.length>0?'<div class="tip">💡 Cliquez sur une cellule pour modifier le créneau · Les effectifs en bas résument la couverture par équipe</div>':''}
-  `
+  ${rows.length?'<div class="tip">💡 Cliquez sur une cellule pour modifier le créneau</div>':''}`
 }
 
 // ═══════════════════════════════════════════════════════
 //  SHIFT POPUP
 // ═══════════════════════════════════════════════════════
-let popState = null
-
-function openPop(rowIdx, dayIdx, triggerEl){
+let popState=null
+function openPop(rowIdx,dayIdx,triggerEl){
   closePop()
-  const rect = triggerEl.getBoundingClientRect()
-  const pop  = document.createElement('div')
-  pop.id = 'spop'
-
-  const groupsHtml = GROUPS.map(g => {
-    const items = SHIFTS.filter(s => s.groupe === g)
-    return `<div class="pop-group">${g}</div>
-    <div class="pop-shifts">
-      ${items.map(s=>`
-        <button class="psbtn" style="background:${s.bg};color:${s.tx};border:1.5px solid ${s.bd}"
-          onclick="selectShift(${rowIdx},${dayIdx},'${s.code}')">
-          <div class="ps-c">${s.code}</div>
-          <div class="ps-d">${s.detail||s.label}</div>
-        </button>`).join('')}
-    </div>`
-  }).join('')
-
-  pop.innerHTML = `
-    <div class="pop-arrow"></div>
-    <div class="pop-head">${DAYS[dayIdx]} — choisir le créneau</div>
-    ${groupsHtml}
-    <button class="pop-clear" onclick="selectShift(${rowIdx},${dayIdx},null)">
-      <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-      Effacer le créneau
-    </button>`
-
+  const rect=triggerEl.getBoundingClientRect()
+  const pop=document.createElement('div'); pop.id='spop'
+  const groupsHtml=GROUPS.map(g=>`<div class="pop-group">${g}</div><div class="pop-shifts">${SHIFTS.filter(s=>s.groupe===g).map(s=>`<button class="psbtn" style="background:${s.bg};color:${s.tx};border:1.5px solid ${s.bd}" onclick="selectShift(${rowIdx},${dayIdx},'${s.code}')"><div class="ps-c">${s.code}</div><div class="ps-d">${s.detail||s.label}</div></button>`).join('')}</div>`).join('')
+  pop.innerHTML=`<div class="pop-arrow"></div><div class="pop-head">${DAYS[dayIdx]} — choisir le créneau</div>${groupsHtml}<button class="pop-clear" onclick="selectShift(${rowIdx},${dayIdx},null)"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg> Effacer</button>`
   document.body.appendChild(pop)
-
-  const pw = 310, ph = Math.min(pop.offsetHeight || 320, 320)
-  let left = rect.left + rect.width/2 - pw/2
-  let top  = rect.bottom + 8
-  if(left < 8) left = 8
-  if(left + pw > window.innerWidth - 8) left = window.innerWidth - pw - 8
-  if(top + ph > window.innerHeight - 8){ top = rect.top - ph - 8 }
-  pop.style.left = left + 'px'
-  pop.style.top  = top  + 'px'
-  if(top < rect.top){
-    const arrow = pop.querySelector('.pop-arrow')
-    arrow.style.cssText='position:absolute;width:12px;height:12px;background:#fff;border-right:1px solid #e2e8f0;border-bottom:1px solid #e2e8f0;transform:rotate(45deg);bottom:-7px;left:50%;margin-left:-6px;top:auto'
-  }
-
-  popState = {rowIdx, dayIdx}
-  setTimeout(() => document.addEventListener('mousedown', closePop), 0)
+  const pw=310,ph=Math.min(pop.offsetHeight||320,320)
+  let left=rect.left+rect.width/2-pw/2,top=rect.bottom+8
+  if(left<8) left=8
+  if(left+pw>window.innerWidth-8) left=window.innerWidth-pw-8
+  if(top+ph>window.innerHeight-8) top=rect.top-ph-8
+  pop.style.left=left+'px'; pop.style.top=top+'px'
+  if(top<rect.top){const a=pop.querySelector('.pop-arrow');a.style.cssText='position:absolute;width:12px;height:12px;background:#fff;border-right:1px solid #e2e8f0;border-bottom:1px solid #e2e8f0;transform:rotate(45deg);bottom:-7px;left:50%;margin-left:-6px;top:auto'}
+  popState={rowIdx,dayIdx}
+  setTimeout(()=>document.addEventListener('mousedown',closePop),0)
 }
-
 function closePop(e){
-  const pop = document.getElementById('spop')
-  if(pop && (!e || !pop.contains(e.target))){
-    pop.remove(); popState = null
-    document.removeEventListener('mousedown', closePop)
-  }
+  const pop=document.getElementById('spop')
+  if(pop&&(!e||!pop.contains(e.target))){pop.remove();popState=null;document.removeEventListener('mousedown',closePop)}
 }
+function selectShift(rowIdx,dayIdx,code){closePop();setShift(rowIdx,dayIdx,code)}
 
-function selectShift(rowIdx, dayIdx, code){
-  closePop()
-  setShift(rowIdx, dayIdx, code)
+// ═══════════════════════════════════════════════════════
+//  CONGÉS TAB
+// ═══════════════════════════════════════════════════════
+function renderConges(){
+  const rows=planRows(), days=weekDays(state.week), wn=weekNum(state.week)
+
+  // Build absence map: { empId: [code|null, ...7] }
+  const absMap={}
+  rows.forEach(row=>{
+    absMap[String(row.employeeId)]=row.shifts.map(c=>(c&&ABS_CODES.has(c))?c:null)
+  })
+
+  // Count absences per role per day for overlap detection
+  const roleAbsCount={} // { role: [0..6] }
+  ROLES.forEach(r=>{roleAbsCount[r]=Array(7).fill(0)})
+  rows.forEach(row=>{
+    const emp=state.employees.find(e=>String(e.id)===String(row.employeeId))
+    if(!emp) return
+    row.shifts.forEach((code,di)=>{
+      if(code&&ABS_CODES.has(code)) roleAbsCount[emp.poste][di]++
+    })
+  })
+
+  // Stats
+  let totalAbs=0,totalPersons=0,rolesAffected=new Set()
+  rows.forEach(row=>{
+    const emp=state.employees.find(e=>String(e.id)===String(row.employeeId))
+    if(!emp) return
+    const hasAbs=row.shifts.some(c=>c&&ABS_CODES.has(c))
+    if(hasAbs){totalPersons++;rolesAffected.add(emp.poste)}
+    row.shifts.forEach(c=>{if(c&&ABS_CODES.has(c)) totalAbs++})
+  })
+  const overlaps=ROLES.reduce((acc,r)=>acc+roleAbsCount[r].filter((n,di)=>n>=2&&state.besoins[r][di]>0).length,0)
+
+  const thDays=days.map((d,i)=>`<th class="${i>=5?'we':''}" style="min-width:100px">${DAYS[i]}<br><span style="font-weight:400;opacity:.7;font-size:9.5px">${fmt(d)}</span></th>`).join('')
+
+  // Group employees by role, only show those in planning with absences
+  let tableRows=''
+  ROLES.forEach(role=>{
+    const roleRows=rows.filter(row=>{
+      const emp=state.employees.find(e=>String(e.id)===String(row.employeeId))
+      return emp&&emp.poste===role
+    })
+    if(!roleRows.length) return
+    tableRows+=`<tr class="cg-role-hdr"><td colspan="8" class="cg-emp-td" style="position:sticky;left:0;z-index:5;background:#f0f4f8!important">${role} <span style="color:#94a3b8;font-weight:400">(${roleRows.length} planifié${roleRows.length>1?'s':''})</span></td></tr>`
+    roleRows.forEach(row=>{
+      const emp=state.employees.find(e=>String(e.id)===String(row.employeeId))
+      if(!emp) return
+      const cells=row.shifts.map((code,di)=>{
+        const we=di>=5
+        const isAbs=code&&ABS_CODES.has(code)
+        const s=isAbs?SBC[code]:null
+        return `<td class="cg-cell${we?' we':''}">
+          ${s?`<span class="cg-badge" style="background:${s.bg};color:${s.tx};border:1px solid ${s.bd}">${s.code}</span>`
+            :code&&WORK.has(code)?`<span style="color:#d1d5db;font-size:11px;font-weight:500">${code}</span>`
+            :`<span class="cg-ok">·</span>`}
+        </td>`
+      }).join('')
+      tableRows+=`<tr><td class="cg-emp-td">${emp.nom} ${emp.prenom}<br><span class="role-pill" style="font-size:9.5px;padding:1px 6px;background:${(ROLE_CLR[emp.poste]||{bg:'#f1f5f9'}).bg};color:${(ROLE_CLR[emp.poste]||{tx:'#64748b'}).tx};border:1px solid ${(ROLE_CLR[emp.poste]||{bd:'#cbd5e1'}).bd}">${emp.poste}</span></td>${cells}</tr>`
+    })
+    // Overlap warning row
+    const hasOverlap=roleAbsCount[role].some((n,di)=>n>=2&&state.besoins[role][di]>0)
+    if(hasOverlap){
+      const warnCells=days.map((d,di)=>{
+        const n=roleAbsCount[role][di],req=state.besoins[role][di]
+        const we=di>=5
+        return `<td class="cg-overlap-cell${we?' we':''}">
+          ${n>=2&&req>0?`<span class="cg-overlap-badge">⚠ ${n} absents</span>`:``}
+        </td>`
+      }).join('')
+      tableRows+=`<tr class="cg-overlap-row"><td class="cg-overlap-td">⚠ Chevauchement ${role}</td>${warnCells}</tr>`
+    }
+  })
+
+  if(!rows.length){
+    document.getElementById('tab-conges').innerHTML=`
+    <div class="topbar">
+      <div class="wnav"><button onclick="changeWeek(-7)">&#8249;</button><div class="winfo"><div class="wnum">Semaine ${wn} · ${days[0].getFullYear()}</div><div class="wrange">${fmt(days[0])} – ${fmt(days[6])}</div></div><button onclick="changeWeek(7)">&#8250;</button></div>
+      <button class="btn b-gray" onclick="goToday()">Aujourd'hui</button>
+    </div>
+    <div class="cg-empty"><div class="ei">📭</div><p>Aucun planning pour cette semaine.<br>Créez un planning dans l'onglet Planning.</p></div>`
+    return
+  }
+
+  const icCal=`<svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>`
+
+  document.getElementById('tab-conges').innerHTML=`
+  <div class="topbar">
+    <div class="wnav"><button onclick="changeWeek(-7)">&#8249;</button><div class="winfo"><div class="wnum">Semaine ${wn} · ${days[0].getFullYear()}</div><div class="wrange">${fmt(days[0])} – ${fmt(days[6])}</div></div><button onclick="changeWeek(7)">&#8250;</button></div>
+    <button class="btn b-gray" onclick="goToday()">${icCal} Aujourd'hui</button>
+    <div class="spacer"></div>
+    <span style="font-size:12px;color:#64748b">Les codes de travail (M1,J…) sont affichés en grisé · Cliquez sur Planning pour modifier les congés</span>
+  </div>
+  <div class="cg-stats">
+    <div class="cg-stat"><div class="cg-stat-n" style="color:#d97706">${totalAbs}</div><div class="cg-stat-l">📅 Jours d'absence cette semaine</div></div>
+    <div class="cg-stat"><div class="cg-stat-n" style="color:#6366f1">${totalPersons}</div><div class="cg-stat-l">👤 Personnes avec absences</div></div>
+    <div class="cg-stat"><div class="cg-stat-n" style="color:#16a34a">${rolesAffected.size}</div><div class="cg-stat-l">🏷️ Postes touchés</div></div>
+    <div class="cg-stat"><div class="cg-stat-n" style="color:${overlaps>0?'#dc2626':'#16a34a'}">${overlaps}</div><div class="cg-stat-l">⚠️ Chevauchements détectés</div></div>
+  </div>
+  <div class="cg-table-wrap">
+    <table class="cg-table">
+      <thead><tr><th class="emp-h">Employé</th>${thDays}</tr></thead>
+      <tbody>${tableRows}</tbody>
+    </table>
+  </div>
+  <div class="eff-key" style="margin-top:12px">
+    ${['CP','RTT','MAL','FM','ABS','R'].map(c=>{const s=SBC[c];return `<div class="eff-key-item"><div class="eff-key-dot" style="background:${s.bg};border:1.5px solid ${s.bd}"></div>${s.label}</div>`}).join('')}
+    <span style="font-size:11px;color:#94a3b8">· ⚠ Chevauchement = 2+ personnes absentes dans le même poste le même jour</span>
+  </div>`
 }
 
 // ═══════════════════════════════════════════════════════
 //  EFFECTIFS JOUR
 // ═══════════════════════════════════════════════════════
 function getActuals(){
-  const rows   = planRows()
-  const result = Object.fromEntries(ROLES.map(r=>[r, Array(7).fill(0)]))
-  rows.forEach(row => {
-    const emp = state.employees.find(e => String(e.id) === String(row.employeeId))
-    if(!emp || !ROLE_CLR[emp.poste]) return
-    row.shifts.forEach((code, di) => {
-      if(code && WORK.has(code)) result[emp.poste][di]++
+  const rows=planRows()
+  const working=Object.fromEntries(ROLES.map(r=>[r,Array(7).fill(0)]))
+  const absent =Object.fromEntries(ROLES.map(r=>[r,Array(7).fill(0)]))
+  rows.forEach(row=>{
+    const emp=state.employees.find(e=>String(e.id)===String(row.employeeId))
+    if(!emp) return
+    row.shifts.forEach((code,di)=>{
+      if(!code) return
+      if(WORK.has(code))        working[emp.poste][di]++
+      else if(code!=='R')       absent[emp.poste][di]++
     })
   })
-  return result
+  return {working,absent}
 }
 
-function updateBesoin(role, di, val){
-  state.besoins[role][di] = Math.max(0, parseInt(val) || 0)
-  save()
+function updateBesoin(role,di,val){
+  state.besoins[role][di]=Math.max(0,parseInt(val)||0); save()
+}
+function promptBesoin(role,di,current){
+  const val=prompt(`Besoin — ${role} — ${DAYS[di]} :\n(0 si fermé)`,current)
+  if(val===null) return
+  updateBesoin(role,di,val); renderEffectifs()
+}
+function resetBesoins(){
+  if(!confirm('Réinitialiser tous les besoins aux valeurs par défaut ?')) return
+  state.besoins=JSON.parse(JSON.stringify(DEFAULT_BESOINS)); save(); renderEffectifs()
 }
 
 function renderEffectifs(){
-  const days    = weekDays(state.week)
-  const wn      = weekNum(state.week)
-  const actuals = getActuals()
+  const days=weekDays(state.week), wn=weekNum(state.week)
+  const {working,absent}=getActuals()
 
-  // Compute summary stats
-  let totalOk=0, totalWarn=0, totalCrit=0, totalCells=0
-  ROLES.forEach(role => {
-    days.forEach((d,di) => {
-      const req = state.besoins[role][di]
-      const act = actuals[role][di]
-      if(req===0) return
+  let totalOk=0,totalWarn=0,totalCrit=0,totalCells=0
+  ROLES.forEach(role=>{
+    days.forEach((_,di)=>{
+      const req=state.besoins[role][di]; if(req===0) return
       totalCells++
-      if(act >= req) totalOk++
-      else if(act > 0) totalWarn++
-      else totalCrit++
+      const act=working[role][di]
+      if(act>=req) totalOk++; else if(act>0) totalWarn++; else totalCrit++
     })
   })
 
-  const icCal  = `<svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>`
+  const thDays=days.map((d,i)=>`<th class="${i>=5?'we':''}" style="min-width:110px">${DAYS[i]}<br><span style="font-weight:400;opacity:.7;font-size:9.5px">${fmt(d)}</span></th>`).join('')
 
-  const thDays = days.map((d,i) => `
-    <th class="${i>=5?'we':''}" style="min-width:110px">
-      ${DAYS[i]}<br><span style="font-weight:400;opacity:.7;font-size:9.5px">${fmt(d)}</span>
-    </th>`).join('')
-
-  // Rows
-  const tableRows = ROLES.map(role => {
-    const rc  = ROLE_CLR[role] || {bg:'#F1F5F9',tx:'#475569',bd:'#CBD5E1'}
-    const cells = days.map((d,di) => {
-      const req = state.besoins[role][di]
-      const act = actuals[role][di]
-      const we  = di >= 5
-      let bg, tx, bd
-      if(req === 0 && act === 0){ bg='#f1f5f9'; tx='#94a3b8'; bd='#e2e8f0' }
-      else if(act >= req)        { bg='#dcfce7'; tx='#15803d'; bd='#86efac' }
-      else if(act > 0)           { bg='#fef9c3'; tx='#a16207'; bd='#fde047' }
-      else                       { bg='#fee2e2'; tx='#dc2626'; bd='#fca5a5' }
-      const reqDisplay = req === 0 && act === 0
-        ? `<span style="color:#cbd5e1">—</span>`
-        : `<span title="Cliquez pour modifier le besoin" style="cursor:pointer;text-decoration:underline dotted" onclick="promptBesoin('${role.replace(/'/g,"\\'")}',${di},${req})">${req} requis</span>`
-      return `<td class="eff-cell${we?' we':''}">
-        <div class="eff-badge" style="background:${bg};color:${tx};border:1.5px solid ${bd}">
-          <div class="eff-actual">${act}</div>
-          <div class="eff-req">${reqDisplay}</div>
-        </div>
-      </td>`
+  const tableRows=ROLES.map(role=>{
+    const rc=ROLE_CLR[role]||{bg:'#F1F5F9',tx:'#475569',bd:'#CBD5E1'}
+    const totalStaff=state.employees.filter(e=>e.poste===role).length
+    const cells=days.map((d,di)=>{
+      const req=state.besoins[role][di], act=working[role][di], abs=absent[role][di]
+      const we=di>=5
+      let bg,tx,bd
+      if(req===0&&act===0){bg='#f1f5f9';tx='#94a3b8';bd='#e2e8f0'}
+      else if(act>=req)   {bg='#dcfce7';tx='#15803d';bd='#86efac'}
+      else if(act>0)      {bg='#fef9c3';tx='#a16207';bd='#fde047'}
+      else                {bg='#fee2e2';tx='#dc2626';bd='#fca5a5'}
+      const reqPart=req===0&&act===0
+        ?`<span style="color:#d1d5db">—</span>`
+        :`<span title="Modifier le besoin" onclick="promptBesoin('${role.replace(/'/g,"\\'")}',${di},${req})">${req} requis</span>`
+      const absPart=abs>0?`<span class="eff-absent-pill">${abs} abs.</span>`:''
+      return `<td class="eff-cell${we?' we':''}"><div class="eff-badge" style="background:${bg};color:${tx};border:1.5px solid ${bd}"><div class="eff-actual">${act}</div><div class="eff-sub">${reqPart}${absPart}</div></div></td>`
     }).join('')
-
-    return `<tr>
-      <td class="rh-td">
-        <div class="role-name">${role}</div>
-        <span class="role-pill" style="background:${rc.bg};color:${rc.tx};border:1px solid ${rc.bd};font-size:10px;padding:1px 7px">${rc.tx?role.split(' ')[0]:''}</span>
-      </td>
-      ${cells}
-    </tr>`
+    return `<tr><td class="rh-td"><div class="rh-name">${role}</div><div class="rh-count">${totalStaff} employé${totalStaff>1?'s':''} au total</div></td>${cells}</tr>`
   }).join('')
 
-  // Total row
-  const totalCells2 = days.map((d,di) => {
-    const req = ROLES.reduce((s,r)=>s+state.besoins[r][di],0)
-    const act = ROLES.reduce((s,r)=>s+actuals[r][di],0)
-    const we  = di >= 5
-    let color = req===0?'#94a3b8':act>=req?'#16a34a':act>0?'#d97706':'#dc2626'
-    return `<td class="eff-cell${we?' we':''}" style="background:#e8edf4!important">
-      <div style="text-align:center">
-        <div style="font-size:18px;font-weight:800;color:${color}">${act}</div>
-        <div style="font-size:10px;color:#64748b">${req} requis</div>
-      </div>
-    </td>`
+  const totalCells2=days.map((_,di)=>{
+    const req=ROLES.reduce((s,r)=>s+state.besoins[r][di],0)
+    const act=ROLES.reduce((s,r)=>s+working[r][di],0)
+    const abs=ROLES.reduce((s,r)=>s+absent[r][di],0)
+    const we=di>=5
+    const color=req===0?'#94a3b8':act>=req?'#16a34a':act>0?'#d97706':'#dc2626'
+    return `<td class="eff-cell${we?' we':''}" style="background:#e8edf4!important"><div style="text-align:center"><div style="font-size:20px;font-weight:800;color:${color}">${act}</div><div style="font-size:10px;color:#64748b">${req} requis${abs>0?` · ${abs} abs.`:''}</div></div></td>`
   }).join('')
 
-  document.getElementById('tab-effectifs').innerHTML = `
+  const icCal=`<svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>`
+
+  document.getElementById('tab-effectifs').innerHTML=`
   <div class="topbar">
-    <div class="wnav">
-      <button onclick="changeWeek(-7)">&#8249;</button>
-      <div class="winfo">
-        <div class="wnum">Semaine ${wn} · ${days[0].getFullYear()}</div>
-        <div class="wrange">${fmt(days[0])} – ${fmt(days[6])}</div>
-      </div>
-      <button onclick="changeWeek(7)">&#8250;</button>
-    </div>
+    <div class="wnav"><button onclick="changeWeek(-7)">&#8249;</button><div class="winfo"><div class="wnum">Semaine ${wn} · ${days[0].getFullYear()}</div><div class="wrange">${fmt(days[0])} – ${fmt(days[6])}</div></div><button onclick="changeWeek(7)">&#8250;</button></div>
     <button class="btn b-gray" onclick="goToday()">${icCal} Aujourd'hui</button>
     <div class="spacer"></div>
-    <button class="btn b-gray" onclick="resetBesoins()" title="Réinitialiser les besoins par défaut">↺ Réinitialiser</button>
+    <button class="btn b-gray" onclick="resetBesoins()">↺ Réinitialiser besoins</button>
   </div>
-
   <div class="eff-summary">
-    <div class="eff-stat">
-      <div class="eff-stat-n" style="color:#16a34a">${totalOk}</div>
-      <div class="eff-stat-l">✅ Créneaux couverts</div>
-    </div>
-    <div class="eff-stat">
-      <div class="eff-stat-n" style="color:#d97706">${totalWarn}</div>
-      <div class="eff-stat-l">⚠️ Couverture partielle</div>
-    </div>
-    <div class="eff-stat">
-      <div class="eff-stat-n" style="color:#dc2626">${totalCrit}</div>
-      <div class="eff-stat-l">🔴 Non couverts</div>
-    </div>
-    <div class="eff-stat">
-      <div class="eff-stat-n" style="color:#3b82f6">${totalCells}</div>
-      <div class="eff-stat-l">📊 Créneaux à pourvoir</div>
-    </div>
+    <div class="eff-stat"><div class="eff-stat-n" style="color:#16a34a">${totalOk}</div><div class="eff-stat-l">✅ Créneaux couverts</div></div>
+    <div class="eff-stat"><div class="eff-stat-n" style="color:#d97706">${totalWarn}</div><div class="eff-stat-l">⚠️ Couverture partielle</div></div>
+    <div class="eff-stat"><div class="eff-stat-n" style="color:#dc2626">${totalCrit}</div><div class="eff-stat-l">🔴 Non couverts</div></div>
+    <div class="eff-stat"><div class="eff-stat-n" style="color:#3b82f6">${totalCells}</div><div class="eff-stat-l">📊 Créneaux à pourvoir</div></div>
   </div>
-
-  <div class="eff-info">
-    <strong>Comment ça marche ?</strong> Ce tableau compare vos <strong>besoins en effectifs</strong> (cliquables pour les modifier) avec la <strong>couverture réelle</strong> issue du planning de la semaine.
-    Les chiffres en vert = objectif atteint · orange = couverture partielle · rouge = personne planifié.
-  </div>
-
+  <div class="eff-info">Le grand chiffre = <strong>personnes présentes (travail effectif)</strong>. "abs." = absences planifiées (CP/RTT/MAL…). Cliquez sur "X requis" pour modifier le besoin.</div>
   <div class="eff-table-wrap">
     <table class="eff-table">
-      <thead>
-        <tr>
-          <th class="rh">Poste</th>
-          ${thDays}
-        </tr>
-      </thead>
+      <thead><tr><th class="rh">Poste</th>${thDays}</tr></thead>
       <tbody>
         ${tableRows}
-        <tr class="eff-total-row">
-          <td class="rh-td" style="background:#e8edf4!important;font-size:11px;font-weight:700;color:#64748b;text-transform:uppercase;letter-spacing:.05em">Total</td>
-          ${totalCells2}
-        </tr>
+        <tr class="eff-total-row"><td class="rh-td" style="background:#e8edf4!important">Total entrepôt</td>${totalCells2}</tr>
       </tbody>
     </table>
   </div>
-
   <div class="eff-key">
-    <div class="eff-key-item"><div class="eff-key-dot" style="background:#dcfce7;border:1.5px solid #86efac"></div> Couvert</div>
-    <div class="eff-key-item"><div class="eff-key-dot" style="background:#fef9c3;border:1.5px solid #fde047"></div> Partiel</div>
-    <div class="eff-key-item"><div class="eff-key-dot" style="background:#fee2e2;border:1.5px solid #fca5a5"></div> Non couvert</div>
-    <div class="eff-key-item"><div class="eff-key-dot" style="background:#f1f5f9;border:1.5px solid #e2e8f0"></div> Pas de besoin</div>
-    <span style="font-size:11px;color:#94a3b8">· Cliquez sur "X requis" pour modifier le besoin</span>
-  </div>
-  `
-}
-
-function promptBesoin(role, di, current){
-  const val = prompt(`Besoin en effectif — ${role} — ${DAYS[di]} :\n(entrez 0 si jour fermé)`, current)
-  if(val === null) return
-  updateBesoin(role, di, val)
-  renderEffectifs()
-}
-
-function resetBesoins(){
-  if(!confirm('Réinitialiser tous les besoins aux valeurs par défaut ?')) return
-  state.besoins = JSON.parse(JSON.stringify(DEFAULT_BESOINS))
-  save(); renderEffectifs()
+    <div class="eff-key-item"><div class="eff-key-dot" style="background:#dcfce7;border:1.5px solid #86efac"></div>Couvert</div>
+    <div class="eff-key-item"><div class="eff-key-dot" style="background:#fef9c3;border:1.5px solid #fde047"></div>Partiel</div>
+    <div class="eff-key-item"><div class="eff-key-dot" style="background:#fee2e2;border:1.5px solid #fca5a5"></div>Non couvert</div>
+    <div class="eff-key-item"><div class="eff-key-dot" style="background:#f1f5f9;border:1.5px solid #e2e8f0"></div>Pas de besoin</div>
+  </div>`
 }
 
 // ═══════════════════════════════════════════════════════
-//  RENDER PERSONNEL
+//  PERSONNEL
 // ═══════════════════════════════════════════════════════
 function renderPersonnel(){
-  const emps = state.filterPoste === 'all'
-    ? state.employees
-    : state.employees.filter(e => e.poste === state.filterPoste)
+  const emps=state.filterPoste==='all'?state.employees:state.employees.filter(e=>e.poste===state.filterPoste)
+  const cntByPoste=Object.fromEntries(ROLES.map(r=>[r,state.employees.filter(e=>e.poste===r).length]))
 
-  const cntByPoste = Object.fromEntries(ROLES.map(r=>[r,state.employees.filter(e=>e.poste===r).length]))
+  const cards=[
+    `<div class="pcard${state.filterPoste==='all'?' active':''}" style="background:#f8fafc;color:#475569;border-color:${state.filterPoste==='all'?'#cbd5e1':'transparent'}" onclick="setFilter('all')"><div class="pcard-n">${state.employees.length}</div><div class="pcard-l">Tous</div></div>`,
+    ...ROLES.map(r=>{
+      const c=ROLE_CLR[r]||{bg:'#F1F5F9',tx:'#475569',bd:'#CBD5E1'}, active=state.filterPoste===r
+      return `<div class="pcard${active?' active':''}" style="background:${c.bg};color:${c.tx};border-color:${active?c.bd:'transparent'}" onclick="setFilter('${r.replace(/'/g,"\\'")}')"><div class="pcard-n">${cntByPoste[r]}</div><div class="pcard-l">${r}</div></div>`
+    })
+  ].join('')
 
-  const cards = ROLES.map(r => {
-    const c = ROLE_CLR[r] || {bg:'#F1F5F9',tx:'#475569',bd:'#CBD5E1'}
-    const active = state.filterPoste === r
-    return `<div class="pcard${active?' active':''}" style="background:${c.bg};color:${c.tx};border-color:${active?c.bd:'transparent'}"
-      onclick="setFilter('${r.replace(/'/g,"\\'")}')">
-      <div class="pcard-n">${cntByPoste[r]}</div>
-      <div class="pcard-l">${r}</div>
-    </div>`
-  }).join('')
-
-  const rows = emps.length === 0
-    ? `<tr><td colspan="5" style="text-align:center;padding:40px;color:#94a3b8;font-size:13px">
-        Aucun employé${state.filterPoste!=='all'?' dans ce poste':''}</td></tr>`
-    : emps.map((emp, i) => {
-        const c = ROLE_CLR[emp.poste] || {bg:'#F1F5F9',tx:'#475569',bd:'#CBD5E1'}
-        return `<tr>
-          <td style="color:#94a3b8;font-size:12px;padding:10px 14px;width:40px">${i+1}</td>
-          <td style="font-weight:700">${emp.nom}</td>
-          <td>${emp.prenom}</td>
-          <td><span class="role-pill" style="background:${c.bg};color:${c.tx};border:1px solid ${c.bd}">${emp.poste}</span></td>
-          <td style="width:80px">
-            <button class="ic-btn ed" onclick="openEmpModal('${emp.id}')" title="Modifier">✏️</button>
-            <button class="ic-btn dl" onclick="askDelete('${emp.id}')" title="Supprimer">🗑️</button>
-          </td>
-        </tr>`
+  const rows=!emps.length
+    ?`<tr><td colspan="5" style="text-align:center;padding:40px;color:#94a3b8">Aucun employé${state.filterPoste!=='all'?' dans ce poste':''}</td></tr>`
+    :emps.map((emp,i)=>{
+        const c=ROLE_CLR[emp.poste]||{bg:'#F1F5F9',tx:'#475569',bd:'#CBD5E1'}
+        return `<tr><td style="color:#94a3b8;font-size:12px">${i+1}</td><td><strong>${emp.nom}</strong></td><td>${emp.prenom}</td><td><span class="role-pill" style="background:${c.bg};color:${c.tx};border:1px solid ${c.bd}">${emp.poste}</span></td><td><button class="ic-btn ed" onclick="openEmpModal('${emp.id}')" title="Modifier">✏️</button><button class="ic-btn dl" onclick="askDelete('${emp.id}')" title="Supprimer">🗑️</button></td></tr>`
       }).join('')
 
-  const filterPill = state.filterPoste !== 'all'
-    ? `<div style="display:flex;align-items:center;gap:8px;margin-bottom:14px">
-        <span style="font-size:12px;color:#64748b">Filtre actif :</span>
-        <button class="btn b-gray" style="padding:3px 10px;font-size:12px" onclick="setFilter('all')">
-          ${state.filterPoste} ✕
-        </button>
-       </div>` : ''
+  const filterPill=state.filterPoste!=='all'?`<div style="display:flex;align-items:center;gap:8px;margin-bottom:14px"><span style="font-size:12px;color:#64748b">Filtre :</span><button class="btn b-gray" style="padding:3px 10px;font-size:12px" onclick="setFilter('all')">${state.filterPoste} ✕</button></div>`:''
 
-  document.getElementById('tab-personnel').innerHTML = `
+  document.getElementById('tab-personnel').innerHTML=`
   <div class="ph">
-    <div class="pt">
-      <div class="pt-ic">👥</div>
-      <div>
-        <h2>Personnel</h2>
-        <p>${state.employees.length} employé${state.employees.length>1?'s':''} enregistré${state.employees.length>1?'s':''}</p>
-      </div>
+    <div class="pt"><div class="pt-ic">👥</div><div><h2>Personnel</h2><p>${state.employees.length} employé${state.employees.length>1?'s':''} enregistré${state.employees.length>1?'s':''}</p></div></div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap">
+      <button class="btn b-gray" onclick="exportEmployees()" title="Exporter la liste">
+        <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        Exporter JSON
+      </button>
+      <button class="btn b-gray" onclick="document.getElementById('import-file').click()" title="Importer une liste">
+        <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+        Importer JSON
+      </button>
+      <button class="btn b-navy" onclick="openEmpModal(null)">
+        <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        Ajouter un employé
+      </button>
     </div>
-    <button class="btn b-navy" onclick="openEmpModal(null)">
-      <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-      Ajouter un employé
-    </button>
   </div>
-
-  <div class="pcards">
-    <div class="pcard${state.filterPoste==='all'?' active':''}" style="background:#f8fafc;color:#475569;border-color:${state.filterPoste==='all'?'#cbd5e1':'transparent'}"
-      onclick="setFilter('all')">
-      <div class="pcard-n">${state.employees.length}</div>
-      <div class="pcard-l">Tous les postes</div>
-    </div>
-    ${cards}
-  </div>
+  <div class="pcards">${cards}</div>
   ${filterPill}
+  <div class="etable-wrap"><table class="etable"><thead><tr><th style="width:40px">#</th><th>Nom</th><th>Prénom</th><th>Poste</th><th style="width:80px"></th></tr></thead><tbody>${rows}</tbody></table></div>`
+}
 
-  <div class="etable-wrap">
-    <table class="etable">
-      <thead><tr>
-        <th style="width:40px">#</th>
-        <th>Nom</th><th>Prénom</th><th>Poste</th><th style="width:80px"></th>
-      </tr></thead>
-      <tbody>${rows}</tbody>
-    </table>
-  </div>`
+// ═══════════════════════════════════════════════════════
+//  IMPORT / EXPORT EMPLOYEES
+// ═══════════════════════════════════════════════════════
+function exportEmployees(){
+  const data={exported:new Date().toISOString(),employees:state.employees}
+  const blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'})
+  const a=document.createElement('a'); a.href=URL.createObjectURL(blob)
+  a.download=`personnel_entrepot_${new Date().toISOString().slice(0,10)}.json`
+  a.click()
+}
+function handleImport(e){
+  const file=e.target.files[0]; if(!file) return
+  const reader=new FileReader()
+  reader.onload=ev=>{
+    try{
+      const data=JSON.parse(ev.target.result)
+      const emps=data.employees||data // support both {employees:[...]} and [...]
+      if(!Array.isArray(emps)||!emps.length) throw new Error('Format invalide')
+      if(!confirm(`Importer ${emps.length} employés ? (remplace la liste actuelle)`)) return
+      state.employees=emps.map(e=>({
+        id:String(e.id||'e'+Date.now()+Math.random()),
+        prenom:String(e.prenom||''),
+        nom:String(e.nom||''),
+        poste:ROLES.includes(e.poste)?e.poste:ROLES[0]
+      }))
+      save(); renderPersonnel()
+      alert(`✅ ${state.employees.length} employés importés avec succès.`)
+    }catch(err){alert('Erreur lors de l\'import : '+err.message)}
+  }
+  reader.readAsText(file)
+  e.target.value=''
 }
 
 // ═══════════════════════════════════════════════════════
 //  EMPLOYEE MODAL
 // ═══════════════════════════════════════════════════════
 function openEmpModal(empId){
-  state.editEmpId = empId
-  const emp = empId ? state.employees.find(e=>e.id===empId) : null
-  document.getElementById('modal-title').textContent = emp ? 'Modifier un employé' : 'Ajouter un employé'
-  document.getElementById('f-prenom').value = emp?.prenom || ''
-  document.getElementById('f-nom').value    = emp?.nom    || ''
-  const sel = document.getElementById('f-poste')
-  sel.innerHTML = ROLES.map(r=>`<option value="${r}"${emp?.poste===r?' selected':''}>${r}</option>`).join('')
-  document.getElementById('modal-save-btn').disabled = !(emp?.prenom && emp?.nom)
+  state.editEmpId=empId
+  const emp=empId?state.employees.find(e=>e.id===empId):null
+  document.getElementById('modal-title').textContent=emp?'Modifier un employé':'Ajouter un employé'
+  document.getElementById('f-prenom').value=emp?.prenom||''
+  document.getElementById('f-nom').value=emp?.nom||''
+  document.getElementById('f-poste').innerHTML=ROLES.map(r=>`<option value="${r}"${emp?.poste===r?' selected':''}>${r}</option>`).join('')
+  document.getElementById('modal-save-btn').disabled=!(emp?.prenom&&emp?.nom)
   document.getElementById('emp-modal').classList.add('open')
-  setTimeout(() => document.getElementById('f-prenom').focus(), 100)
+  setTimeout(()=>document.getElementById('f-prenom').focus(),100)
 }
-
-function closeEmpModal(){
-  document.getElementById('emp-modal').classList.remove('open')
-}
-
+function closeEmpModal(){document.getElementById('emp-modal').classList.remove('open')}
 function validateEmpForm(){
-  const ok = document.getElementById('f-prenom').value.trim() && document.getElementById('f-nom').value.trim()
-  document.getElementById('modal-save-btn').disabled = !ok
+  document.getElementById('modal-save-btn').disabled=!(document.getElementById('f-prenom').value.trim()&&document.getElementById('f-nom').value.trim())
 }
-
 function saveEmployee(){
-  const prenom = document.getElementById('f-prenom').value.trim()
-  const nom    = document.getElementById('f-nom').value.trim().toUpperCase()
-  const poste  = document.getElementById('f-poste').value
-  if(!prenom || !nom) return
+  const prenom=document.getElementById('f-prenom').value.trim()
+  const nom=document.getElementById('f-nom').value.trim().toUpperCase()
+  const poste=document.getElementById('f-poste').value
+  if(!prenom||!nom) return
   if(state.editEmpId){
-    state.employees = state.employees.map(e => e.id===state.editEmpId ? {...e,prenom,nom,poste} : e)
+    state.employees=state.employees.map(e=>e.id===state.editEmpId?{...e,prenom,nom,poste}:e)
   } else {
-    state.employees = [...state.employees, {id:'e'+Date.now(), prenom, nom, poste}]
+    state.employees=[...state.employees,{id:'e'+Date.now(),prenom,nom,poste}]
   }
   save(); closeEmpModal(); renderPersonnel()
 }
 
 // ═══════════════════════════════════════════════════════
-//  CONFIRM DELETE
+//  CONFIRM / DELETE
 // ═══════════════════════════════════════════════════════
 function askDelete(empId){
-  const emp = state.employees.find(e=>e.id===empId)
-  document.getElementById('confirm-title').textContent = `Supprimer ${emp?.prenom} ${emp?.nom} ?`
-  document.getElementById('confirm-msg').textContent   = 'Cet employé sera retiré de tous les plannings.'
-  state.confirmCb = () => {
-    state.employees = state.employees.filter(e=>e.id!==empId)
-    for(const w in state.plannings) state.plannings[w] = state.plannings[w].filter(r=>r.employeeId!==empId)
+  const emp=state.employees.find(e=>e.id===empId)
+  document.getElementById('confirm-title').textContent=`Supprimer ${emp?.prenom} ${emp?.nom} ?`
+  document.getElementById('confirm-msg').textContent='Cet employé sera retiré de tous les plannings.'
+  state.confirmCb=()=>{
+    state.employees=state.employees.filter(e=>e.id!==empId)
+    for(const w in state.plannings) state.plannings[w]=state.plannings[w].filter(r=>r.employeeId!==empId)
     save(); closeConfirm(); renderPersonnel()
   }
   document.getElementById('confirm-modal').classList.add('open')
 }
-function closeConfirm(){ document.getElementById('confirm-modal').classList.remove('open'); state.confirmCb=null }
-function confirmAction(){ if(state.confirmCb) state.confirmCb() }
+function closeConfirm(){document.getElementById('confirm-modal').classList.remove('open');state.confirmCb=null}
+function confirmAction(){if(state.confirmCb) state.confirmCb()}
 
 // ═══════════════════════════════════════════════════════
 //  NAVIGATION
 // ═══════════════════════════════════════════════════════
 function setTab(t){
-  state.tab = t
-  document.querySelectorAll('.nav-btn').forEach(b => b.classList.toggle('on', b.dataset.tab===t))
-  document.querySelectorAll('.tab').forEach(el => el.classList.remove('on'))
+  state.tab=t
+  document.querySelectorAll('.nav-btn').forEach(b=>b.classList.toggle('on',b.dataset.tab===t))
+  document.querySelectorAll('.tab').forEach(el=>el.classList.remove('on'))
   document.getElementById('tab-'+t).classList.add('on')
-  if(t==='planning')  renderPlanning()
-  else if(t==='effectifs') renderEffectifs()
-  else if(t==='personnel') renderPersonnel()
+  if(t==='planning')   renderPlanning()
+  else if(t==='conges')     renderConges()
+  else if(t==='effectifs')  renderEffectifs()
+  else if(t==='personnel')  renderPersonnel()
 }
-
-function changeWeek(n){ state.week=addDays(state.week,n); rerender() }
-function goToday(){     state.week=weekStart();            rerender() }
+function changeWeek(n){state.week=addDays(state.week,n);rerender()}
+function goToday(){state.week=weekStart();rerender()}
 function rerender(){
   if(state.tab==='planning')  renderPlanning()
+  else if(state.tab==='conges')    renderConges()
   else if(state.tab==='effectifs') renderEffectifs()
 }
-function setFilter(p){ state.filterPoste=p; renderPersonnel() }
+function setFilter(p){state.filterPoste=p;renderPersonnel()}
 
 // ═══════════════════════════════════════════════════════
 //  EXPORT PDF
 // ═══════════════════════════════════════════════════════
 function exportPDF(){
-  const rows=planRows(), days=weekDays(state.week), wn=weekNum(state.week)
-
-  const rowsHtml = rows.map(row => {
-    const emp = state.employees.find(e=>String(e.id)===String(row.employeeId)); if(!emp) return ''
-    const rc  = ROLE_CLR[emp.poste]||{bg:'#F1F5F9',tx:'#475569',bd:'#CBD5E1'}
-    const cells = row.shifts.map((code,i) => {
-      const we=i>=5, s=code?SBC[code]:null
-      return `<td class="${we?'we':''}">
-        ${s?`<div class="b" style="background:${s.bg};color:${s.tx};border:1.5px solid ${s.bd}">
-          <strong>${s.code}</strong>${s.detail?`<br><small>${s.detail}</small>`:''}</div>`
-          :'<span class="em">—</span>'}
-      </td>`
-    }).join('')
-    return `<tr>
-      <td class="ec">
-        <div class="en">${emp.nom} ${emp.prenom}</div>
-        <span class="rp" style="background:${rc.bg};color:${rc.tx};border:1px solid ${rc.bd}">${emp.poste}</span>
-      </td>${cells}</tr>`
+  const rows=planRows(),days=weekDays(state.week),wn=weekNum(state.week)
+  const rowsHtml=rows.map(row=>{
+    const emp=state.employees.find(e=>String(e.id)===String(row.employeeId));if(!emp)return''
+    const rc=ROLE_CLR[emp.poste]||{bg:'#F1F5F9',tx:'#475569',bd:'#CBD5E1'}
+    const cells=row.shifts.map((code,i)=>{const we=i>=5,s=code?SBC[code]:null;return `<td class="${we?'we':''}">${s?`<div class="b" style="background:${s.bg};color:${s.tx};border:1.5px solid ${s.bd}"><strong>${s.code}</strong>${s.detail?`<br><small>${s.detail}</small>`:''}</div>`:'<span class="em">—</span>'}</td>`}).join('')
+    return `<tr><td class="ec"><div class="en">${emp.nom} ${emp.prenom}</div><span class="rp" style="background:${rc.bg};color:${rc.tx};border:1px solid ${rc.bd}">${emp.poste}</span></td>${cells}</tr>`
   }).join('')
-
-  // Summary row
-  const sumCells = Array.from({length:7},(_,di)=>{
-    const codes=rows.map(r=>r.shifts[di]).filter(Boolean)
-    const cnt={}; codes.forEach(c=>{cnt[c]=(cnt[c]||0)+1})
-    const badges=Object.entries(cnt).map(([c,n])=>{
-      const s=SBC[c]; if(!s) return ''
-      return `<span style="background:${s.bg};color:${s.tx};border:1px solid ${s.bd};font-size:7.5px;font-weight:700;padding:1px 4px;border-radius:3px;display:inline-block;margin:1px">${c}×${n}</span>`
-    }).join('')
-    return `<td style="text-align:center;background:#f0f4f8!important;padding:3px">${badges||'—'}</td>`
-  }).join('')
-  const sumRow = rows.length>0?`<tr><td style="background:#f0f4f8;padding:4px 8px;font-size:8px;font-weight:700;color:#94a3b8;text-transform:uppercase">Effectifs</td>${sumCells}</tr>`:''
-
-  const legHtml = SHIFTS.map(s=>
-    `<span class="li" style="background:${s.bg};color:${s.tx};border:1.5px solid ${s.bd}"><strong>${s.code}</strong>${s.detail?' '+s.detail:' '+s.label}</span>`
-  ).join('')
-
-  const html=`<!DOCTYPE html><html lang="fr"><head><meta charset="UTF-8">
-<title>Planning Semaine ${wn}</title>
-<style>
-*{box-sizing:border-box;margin:0;padding:0}
-body{font-family:'Segoe UI',Arial,sans-serif;font-size:11px;color:#1e293b;background:#fff}
-@page{size:A4 landscape;margin:8mm}
-.hd{background:linear-gradient(135deg,#002855,#003d80);color:#fff;padding:10px 16px;border-radius:8px 8px 0 0;display:flex;justify-content:space-between;align-items:center}
-.hd h1{font-size:14px;font-weight:700}.hd .sub{font-size:10px;opacity:.7}
-.leg{padding:6px 10px;background:#f8fafc;border:1px solid #e2e8f0;border-top:none;display:flex;flex-wrap:wrap;gap:4px;align-items:center;margin-bottom:4px}
-.leg-t{font-size:9px;font-weight:700;color:#64748b;text-transform:uppercase;letter-spacing:.05em;margin-right:4px}
-.li{border-radius:4px;padding:2px 6px;font-size:9px;white-space:nowrap}
-table{width:100%;border-collapse:collapse;border-radius:0 0 8px 8px;overflow:hidden}
-thead th{background:#1e3a5f;color:#fff;font-size:10px;font-weight:700;padding:7px 4px;text-align:center;border:1px solid #2d5282;text-transform:uppercase;letter-spacing:.04em}
-thead th.emp-th{text-align:left;padding-left:10px;min-width:130px}
-thead th.we{background:#2d4a6e;color:#8ba8c8}
-tr:nth-child(even) td{background:#f8fafc}
-tr:nth-child(odd) td{background:#fff}
-td{border:1px solid #e2e8f0;vertical-align:middle}
-.ec{padding:5px 8px;min-width:130px}
-.en{font-weight:700;font-size:11px;color:#1e293b}
-.rp{display:inline-block;font-size:7.5px;padding:1px 5px;border-radius:10px;margin-top:2px;font-weight:600}
-td:not(.ec){text-align:center;padding:3px;width:86px}.we{background:#f1f5f9!important}
-.b{border-radius:5px;padding:4px 5px;display:inline-block;min-width:72px;text-align:center}
-.b strong{font-size:11px;display:block;font-weight:800}.b small{font-size:8px;opacity:.85}
-.em{color:#cbd5e1;font-size:14px}
-.ft{display:flex;justify-content:space-between;color:#94a3b8;font-size:9px;padding:5px 2px;margin-top:5px}
-</style>
-</head><body>
-<div class="hd">
-  <div>
-    <h1>📦 Planning Entrepôt — Semaine ${wn}</h1>
-    <div class="sub">${fmtL(days[0])} au ${fmtL(days[6])}</div>
-  </div>
-  <div class="sub">${rows.length} employé${rows.length>1?'s':''} planifié${rows.length>1?'s':''}</div>
-</div>
-<div class="leg">
-  <span class="leg-t">Légende</span>
-  ${legHtml}
-</div>
-<table>
-  <thead><tr>
-    <th class="emp-th">Employé</th>
-    ${DAYS.map((d,i)=>`<th class="${i>=5?'we':''}">${d}<br><span style="font-weight:400;opacity:.8">${fmt(days[i])}</span></th>`).join('')}
-  </tr></thead>
-  <tbody>
-    ${rowsHtml||'<tr><td colspan="8" style="text-align:center;padding:20px;color:#94a3b8">Aucun employé planifié cette semaine</td></tr>'}
-    ${sumRow}
-  </tbody>
-</table>
-<div class="ft">
-  <span>Imprimé le ${new Date().toLocaleDateString('fr-FR')} à ${new Date().toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit'})}</span>
-  <span>Planning Entrepôt — Semaine ${wn} / ${days[0].getFullYear()}</span>
-</div>
-<script>window.onload=()=>window.print()<\/script>
-</body></html>`
-
-  const w = window.open('','_blank')
-  if(!w){ alert("Veuillez autoriser les popups pour exporter en PDF."); return }
+  const sumCells=Array.from({length:7},(_,di)=>{const cnt={};rows.forEach(r=>{const c=r.shifts[di];if(c)cnt[c]=(cnt[c]||0)+1});const b=Object.entries(cnt).map(([c,n])=>{const s=SBC[c];if(!s)return'';return`<span style="background:${s.bg};color:${s.tx};border:1px solid ${s.bd};font-size:7px;font-weight:700;padding:1px 4px;border-radius:3px;display:inline-block;margin:1px">${c}×${n}</span>`}).join('');return`<td style="text-align:center;background:#f0f4f8;padding:3px">${b||'—'}</td>`}).join('')
+  const sumRow=rows.length?`<tr><td style="background:#f0f4f8;padding:4px 8px;font-size:8px;font-weight:700;color:#94a3b8;text-transform:uppercase">Effectifs</td>${sumCells}</tr>`:''
+  const legHtml=SHIFTS.map(s=>`<span style="background:${s.bg};color:${s.tx};border:1.5px solid ${s.bd};border-radius:4px;padding:2px 6px;font-size:9px;white-space:nowrap;display:inline-block"><strong>${s.code}</strong>${s.detail?' '+s.detail:' '+s.label}</span>`).join('')
+  const html=`<!DOCTYPE html><html lang="fr"><head><meta charset="UTF-8"><title>Planning S${wn}</title><style>*{box-sizing:border-box;margin:0;padding:0}body{font-family:'Segoe UI',Arial,sans-serif;font-size:11px;color:#1e293b;background:#fff}@page{size:A4 landscape;margin:8mm}.hd{background:linear-gradient(135deg,#002855,#003d80);color:#fff;padding:10px 16px;border-radius:8px 8px 0 0;display:flex;justify-content:space-between;align-items:center}.hd h1{font-size:14px;font-weight:700}.hd .sub{font-size:10px;opacity:.7}.leg{padding:6px 10px;background:#f8fafc;border:1px solid #e2e8f0;border-top:none;display:flex;flex-wrap:wrap;gap:4px;align-items:center;margin-bottom:4px}.leg-t{font-size:9px;font-weight:700;color:#64748b;text-transform:uppercase;letter-spacing:.05em;margin-right:4px}table{width:100%;border-collapse:collapse}thead th{background:#1e3a5f;color:#fff;font-size:10px;font-weight:700;padding:7px 4px;text-align:center;border:1px solid #2d5282;text-transform:uppercase;letter-spacing:.04em}thead th.emp-th{text-align:left;padding-left:10px;min-width:130px}thead th.we{background:#2d4a6e;color:#8ba8c8}tr:nth-child(even) td{background:#f8fafc}td{border:1px solid #e2e8f0;vertical-align:middle}.ec{padding:5px 8px;min-width:130px}.en{font-weight:700;font-size:11px}.rp{display:inline-block;font-size:7.5px;padding:1px 5px;border-radius:10px;margin-top:2px;font-weight:600}td:not(.ec){text-align:center;padding:3px;width:86px}.we{background:#f1f5f9!important}.b{border-radius:5px;padding:4px 5px;display:inline-block;min-width:72px;text-align:center}.b strong{font-size:11px;display:block;font-weight:800}.b small{font-size:8px;opacity:.85}.em{color:#cbd5e1;font-size:14px}.ft{display:flex;justify-content:space-between;color:#94a3b8;font-size:9px;padding:5px 2px;margin-top:5px}</style></head><body><div class="hd"><div><h1>📦 Planning Entrepôt — Semaine ${wn}</h1><div class="sub">${fmtL(days[0])} au ${fmtL(days[6])}</div></div><div class="sub">${rows.length} employé${rows.length>1?'s':''} planifié${rows.length>1?'s':''}</div></div><div class="leg"><span class="leg-t">Légende</span>${legHtml}</div><table><thead><tr><th class="emp-th">Employé</th>${DAYS.map((d,i)=>`<th class="${i>=5?'we':''}">${d}<br><span style="font-weight:400;opacity:.8">${fmt(days[i])}</span></th>`).join('')}</tr></thead><tbody>${rowsHtml||'<tr><td colspan="8" style="text-align:center;padding:20px;color:#94a3b8">Aucun employé planifié</td></tr>'}${sumRow}</tbody></table><div class="ft"><span>Imprimé le ${new Date().toLocaleDateString('fr-FR')} à ${new Date().toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit'})}</span><span>Semaine ${wn} / ${days[0].getFullYear()}</span></div><script>window.onload=()=>window.print()<\/script></body></html>`
+  const w=window.open('','_blank')
+  if(!w){alert('Autorisez les popups pour exporter en PDF.');return}
   w.document.write(html); w.document.close()
 }
 
@@ -1098,63 +975,54 @@ td:not(.ec){text-align:center;padding:3px;width:86px}.we{background:#f1f5f9!impo
 //  EXPORT EXCEL
 // ═══════════════════════════════════════════════════════
 function exportExcel(){
-  if(typeof XLSX==='undefined'){ alert('Librairie Excel non chargée.'); return }
-  const rows=planRows(), days=weekDays(state.week), wn=weekNum(state.week)
-  const actuals=getActuals()
+  if(typeof XLSX==='undefined'){alert('Librairie Excel non chargée.');return}
+  const rows=planRows(),days=weekDays(state.week),wn=weekNum(state.week)
+  const {working,absent}=getActuals()
 
-  // ── Planning sheet ──────────────────────────────────
-  const aoa=[]
-  aoa.push([`PLANNING ENTREPÔT — Semaine ${wn}  (${fmtL(days[0])} au ${fmtL(days[6])})`])
-  aoa.push([])
-  aoa.push(['Poste','Employé',...DAYS.map((d,i)=>`${d}\n${fmt(days[i])}`)])
+  const aoa=[
+    [`PLANNING ENTREPÔT — Semaine ${wn}  (${fmtL(days[0])} au ${fmtL(days[6])})`],
+    [],
+    ['Poste','Employé',...DAYS.map((d,i)=>`${d}\n${fmt(days[i])}`)],
+  ]
   rows.forEach(row=>{
-    const emp=state.employees.find(e=>String(e.id)===String(row.employeeId)); if(!emp) return
-    aoa.push([emp.poste,`${emp.nom} ${emp.prenom}`,...row.shifts.map(c=>{
-      if(!c) return ''; const s=SBC[c]; return s?`${c}${s.detail?'  '+s.detail:''}`:c
-    })])
+    const emp=state.employees.find(e=>String(e.id)===String(row.employeeId));if(!emp)return
+    aoa.push([emp.poste,`${emp.nom} ${emp.prenom}`,...row.shifts.map(c=>{if(!c)return'';const s=SBC[c];return s?`${c}${s.detail?' '+s.detail:''}`:c})])
   })
-  aoa.push([])
-  // Summary line
-  aoa.push(['','Effectifs',...Array.from({length:7},(_,di)=>{
-    const cnt={}; rows.forEach(r=>{const c=r.shifts[di];if(c)cnt[c]=(cnt[c]||0)+1})
-    return Object.entries(cnt).map(([c,n])=>`${c}×${n}`).join('  ')||'—'
-  })])
+  aoa.push([],[`Effectifs`,...Array.from({length:7},(_,di)=>{const cnt={};rows.forEach(r=>{const c=r.shifts[di];if(c)cnt[c]=(cnt[c]||0)+1});return Object.entries(cnt).map(([c,n])=>`${c}×${n}`).join(' ')||'—'})])
 
   const ws=XLSX.utils.aoa_to_sheet(aoa)
   ws['!cols']=[{wch:22},{wch:22},...Array(7).fill({wch:17})]
   ws['!merges']=[{s:{r:0,c:0},e:{r:0,c:8}}]
 
-  // ── Effectifs Jour sheet ────────────────────────────
-  const aoa2=[]
-  aoa2.push([`EFFECTIFS JOUR — Semaine ${wn}  (${fmtL(days[0])} au ${fmtL(days[6])})`])
-  aoa2.push([])
-  aoa2.push(['Poste',...DAYS.map((d,i)=>`${d} ${fmt(days[i])}`)])
+  const aoa2=[
+    [`EFFECTIFS JOUR — Semaine ${wn}  (${fmtL(days[0])} au ${fmtL(days[6])})`],[],
+    ['Poste','Total employés',...DAYS.map((d,i)=>`${d} ${fmt(days[i])}`)],
+  ]
   ROLES.forEach(role=>{
-    aoa2.push([role,...Array.from({length:7},(_,di)=>{
-      const req=state.besoins[role][di], act=actuals[role][di]
-      return `${act}/${req}`
+    const total=state.employees.filter(e=>e.poste===role).length
+    aoa2.push([role,total,...Array.from({length:7},(_,di)=>{
+      const req=state.besoins[role][di],act=working[role][di],abs=absent[role][di]
+      return `${act}/${req}${abs>0?' ('+abs+'abs)':''}`
     })])
   })
-  aoa2.push([])
-  aoa2.push(['TOTAL',...Array.from({length:7},(_,di)=>{
+  aoa2.push([],[`TOTAL`,'',  ...Array.from({length:7},(_,di)=>{
     const req=ROLES.reduce((s,r)=>s+state.besoins[r][di],0)
-    const act=ROLES.reduce((s,r)=>s+actuals[r][di],0)
+    const act=ROLES.reduce((s,r)=>s+working[r][di],0)
     return `${act}/${req}`
   })])
 
   const ws2=XLSX.utils.aoa_to_sheet(aoa2)
-  ws2['!cols']=[{wch:22},...Array(7).fill({wch:13})]
-  ws2['!merges']=[{s:{r:0,c:0},e:{r:0,c:7}}]
+  ws2['!cols']=[{wch:22},{wch:14},...Array(7).fill({wch:14})]
+  ws2['!merges']=[{s:{r:0,c:0},e:{r:0,c:8}}]
 
-  // ── Legend sheet ────────────────────────────────────
-  const leg=[['Code','Libellé','Horaire','Groupe'],...SHIFTS.map(s=>[s.code,s.label,s.detail||'—',s.groupe])]
-  const ws3=XLSX.utils.aoa_to_sheet(leg)
+  const aoa3=[['Code','Libellé','Horaire','Groupe'],...SHIFTS.map(s=>[s.code,s.label,s.detail||'—',s.groupe])]
+  const ws3=XLSX.utils.aoa_to_sheet(aoa3)
   ws3['!cols']=[{wch:7},{wch:14},{wch:17},{wch:11}]
 
   const wb=XLSX.utils.book_new()
   XLSX.utils.book_append_sheet(wb,ws,'Planning')
   XLSX.utils.book_append_sheet(wb,ws2,'Effectifs Jour')
-  XLSX.utils.book_append_sheet(wb,ws3,'Légende Horaires')
+  XLSX.utils.book_append_sheet(wb,ws3,'Légende')
   XLSX.writeFile(wb,`Planning_S${wn}_${days[0].getFullYear()}.xlsx`)
 }
 
